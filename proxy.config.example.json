@@ -1,0 +1,12 @@
+{
+  "/api/*": {
+    "target": "https://mobile.ilucca-dev.net/api/expenseItems",
+    "secure": "false",
+    "logLevel": "debug",
+    "changeOrigin": "true",
+    "headers": {"authorization":"Bearer YOUR_TOKEN", "accept": "application/json"},
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}
