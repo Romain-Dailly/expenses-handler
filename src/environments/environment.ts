@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_URL: '/api',
+  TOKEN: '36aa1dd407d5e9019e4549de259528407b4c08c8',
+  CURRENCYLAYER_URL: 'http://api.currencylayer.com/convert?access_key=',
+  CURRENCYLAYER_APIKEY : '2fc868eed73d06f3cfd690b152dcd954'
 };
 
 /*

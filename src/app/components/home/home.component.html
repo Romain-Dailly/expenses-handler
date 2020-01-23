@@ -1,0 +1,13 @@
+<p *ngIf='isLoading'>Loading</p>
+<div  *ngIf='expenseItems && isLoading===false'>
+  <div *ngFor='let item of expenseItems'>
+    <p>{{item.id}}</p>
+    <p>{{item.purchasedOn}}</p>
+    <p>{{item.nature}}</p>
+    <p>{{item.originalAmount.amount}} {{item.originalAmount.currency}}</p>
+    <p>{{item.convertedAmount.amount}} {{item.convertedAmount.currency}}</p>
+    <p>{{item.comment}}</p>
+    <p>{{item.createdAt}}</p>
+    <p>{{item.lastModifiedAt}}</p>
+  </div>
+</div>

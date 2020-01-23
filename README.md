@@ -2,9 +2,25 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0-rc.9.
 
+## Environment
+
+Set values of your TOKEN and APIKEY in `environment.example.ts` and then change the file name to `environment.ts` for developpment purpose.
+For production build, copy the content of the file in `environment.prod.ts`.
+
+## API calls
+
+### External calls to API
+To call API during developpment, because of CORS in browser, if you're not locally developping the project, use a proxy.
+Change the `proxy.config.example.json` in root folder to `proxy.config.json` and set the header's authorization's value with your token.
+
+### Local calls to API
+To call the API just set the API_URL in `environment.ts`.
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+To use the proxy, run `npm run sp` command.
 
 ## Code scaffolding
 
