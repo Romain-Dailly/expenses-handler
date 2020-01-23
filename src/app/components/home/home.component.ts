@@ -9,7 +9,7 @@ import { DataService } from '../../services/data.service';
 })
 export class HomeComponent implements OnInit {
 
-  private expensesItemResponse;
+  private expenseItemsResponse;
   public expenseItems: ExpenseItemInterface[];
 
   isLoading: boolean = true;
@@ -17,15 +17,19 @@ export class HomeComponent implements OnInit {
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    this.dataService.getExpenseItems().subscribe(data => {
+
+    this.dataService.getExpenseItems().subscribe(
+      data => {
+
       this.isLoading = true;
-      this.expensesItemResponse = data;
-      this.expenseItems = this.expensesItemResponse.items;
+      this.expenseItemsResponse = data;
+      this.expenseItems = this.expenseItemsResponse.items;
       console.log(data);
       this.isLoading = false;
-    },
-    error => {
-      console.log(error);
+      },
+      error => {
+
+        console.log(error);
       }
     );
   }
