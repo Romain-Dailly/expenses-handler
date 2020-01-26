@@ -2,8 +2,14 @@ export interface ExpenseItemInterface {
   id: string;
   purchasedOn: Date;
   nature: string;
-  originalAmount: number;
-  convertedAmount: number;
+  originalAmount: {
+    amount: number,
+    currency:string
+  };
+  convertedAmount: {
+    amount: number,
+    currency:string
+  };
   comment: string;
   createdAt: string;
   lastModifiedAt: string;

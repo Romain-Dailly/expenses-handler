@@ -2,42 +2,32 @@
   <!-- <div class='sort-header'>
 
   </div> -->
+  
   <div class ='expenses-list' >
     <!-- <p>{{item.id}}</p> -->
-    <div class='expense-card'*ngFor='let item of expenseItems'>
-      
-      <div class='nature-comment'>
-        <p title='Nature de la dépense'>{{item.nature}}</p>
-        <p title='Commentaire'>{{item.comment}}</p>
-      </div>
-      <div class='amount-currency'>
-        <p title='Montant dans la devise de dépense'>{{item.originalAmount.amount}} {{item.originalAmount.currency}}</p>
-        <p>{{item.convertedAmount.amount}} {{item.convertedAmount.currency}}</p>
-      </div>
+    <div class='expense' *ngFor='let item of expenseItems'>
       <div class='date'>
-        <p title='Montant en euros'>{{item.purchasedOn}}</p>
+        <p>{{item.purchasedOn}}</p>
+      </div>
+      <div class='expense-card'>
+        
+        <div class='nature'>
+          <p title='Nature de la dépense'>{{item.nature}}</p>
+        </div>
+        <div class='comment'>
+          <p title='Commentaire'>{{item.comment}}</p>
+        </div>
+        <div class='amount-currency'>
+          <p><span class='amount'>{{item.originalAmount.amount}}</span> {{item.originalAmount.currency}}</p>
+        </div>
+        <div class='converted-amount-currency'>
+          <p><span class='amount'>{{item.convertedAmount.amount}}</span> {{item.convertedAmount.currency}}</p>
+        </div>
       </div>
     </div>
     <!-- <p>{{item.createdAt}}</p> -->
     <!-- <p>{{item.lastModifiedAt}}</p> -->
   </div>
-  <div class ='expenses-list' >
-    <!-- <p>{{item.id}}</p> -->
-    <div class='expense-card'*ngFor='let item of expenseItems'>
-      
-      <div class='nature-comment'>
-        <p title='Nature de la dépense'>{{item.nature}}</p>
-        <p title='Commentaire'>{{item.comment}}</p>
-      </div>
-      <div class='amount-currency'>
-        <p title='Montant dans la devise de dépense'>{{item.originalAmount.amount}} {{item.originalAmount.currency}}</p>
-        <p>{{item.convertedAmount.amount}} {{item.convertedAmount.currency}}</p>
-      </div>
-      <div class='date'>
-        <p title='Montant en euros'>{{item.purchasedOn}}</p>
-      </div>
-    </div>
     <!-- <p>{{item.createdAt}}</p> -->
     <!-- <p>{{item.lastModifiedAt}}</p> -->
-  </div>
 </div>

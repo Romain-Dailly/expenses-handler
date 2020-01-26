@@ -12,17 +12,21 @@ export class DataService {
   private token: string = environment.TOKEN;
   private api_url: string = environment.API_URL;
 
-  httpOptions = {
+ httpOptions = {
     headers: new HttpHeaders({
       'Authorization': `Bearer ${this.token}`,
       'accept': 'application/json',
       })
-  };
+  }; 
 
   constructor(private http:HttpClient) { }
   
   getExpenseItems(): Observable<Object> {
     return this.http.get(this.api_url, this.httpOptions)
+  }
+
+  postNewExpenseItem(body) {
+    return this.http.post(this.api_url, body, this.httpOptions)
   }
 
 }

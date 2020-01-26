@@ -6,6 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Set values of your TOKEN and APIKEY in `environment.example.ts` and then change the file name to `environment.ts` for developpment purpose.
 For production build, copy the content of the file in `environment.prod.ts`.
+For currency conversion to euros API, set url and token in the file.
 
 ## API calls
 

@@ -16,15 +16,17 @@ export class HomeComponent implements OnInit {
   
   constructor(private dataService:DataService) { }
 
-  ngOnInit() {
+  getExpensesFromApi() {
 
     this.dataService.getExpenseItems().subscribe(
       data => {
 
       this.isLoading = true;
       this.expenseItemsResponse = data;
-      this.expenseItems = this.expenseItemsResponse.items;
-      console.log(data);
+        
+      // Set expenseItems and orderBy purchasedOn date from recent to old
+      this.expenseItems = this.expenseItemsResponse.items.sort((a, b) => Number(new Date(a.purchasedOn)) - Number(new Date((b.purchasedOn)))).reverse();
+      console.log(this.expenseItems);
       this.isLoading = false;
       },
       error => {
@@ -32,6 +34,10 @@ export class HomeComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  ngOnInit() {
+
+    this.getExpensesFromApi();
   }
 
 }
