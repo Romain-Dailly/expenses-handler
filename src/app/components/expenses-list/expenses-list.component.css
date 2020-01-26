@@ -134,6 +134,7 @@
 }
 .details {
   z-index:0;
+  align-content: center;
 }
 
 

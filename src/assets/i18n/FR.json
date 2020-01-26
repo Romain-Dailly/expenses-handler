@@ -1,0 +1,21 @@
+{
+  "text": {
+    "globals":{
+      "nature":"Nature du frais",
+      "comment":"Commentaire",
+      "originalAmount":"Montant initial",
+      "convertedAmount":"Montant en euros",
+      "currency":"Devise"
+    },
+    "form":{
+      "title":{
+        "creation": "Création",
+        "mofication":"Modification"
+      },
+      "buttons":{
+        "save":"Enregistrer",
+        "delete":"Supprimer"
+      }
+    }
+  }
+}

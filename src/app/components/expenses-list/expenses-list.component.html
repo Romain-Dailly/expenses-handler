@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div class='details' *ngIf='selectedItem === i && areShownDetails' ><app-form [itemToBeModified]='shownExpenseItem'></app-form></div>
+      <div class='details' *ngIf='selectedItem === i && areShownDetails' ><app-form [itemToBeModified]='shownExpenseItem' (expensesListModified)='updateExpenseListOnListChange()'></app-form></div>
     </div>
   </div>
     <!-- <p>{{item.createdAt}}</p> -->

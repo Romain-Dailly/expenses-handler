@@ -1,6 +1,6 @@
 import { ExpenseItemInterface } from './../../interfaces/expense-item.interface';
-import { Component, OnInit, Input } from '@angular/core';
-import { trigger, transition, animate, style } from '@angular/animations'
+import { Component, OnInit, Input,Output, EventEmitter } from '@angular/core';
+import { trigger, transition, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-expenses-list',
@@ -20,6 +20,7 @@ import { trigger, transition, animate, style } from '@angular/animations'
 })
 export class ExpensesListComponent implements OnInit {
 
+  @Output() passUpdateExpenseListOnListChange = new EventEmitter();
   @Input() expenseItems;
   shownExpenseItem:ExpenseItemInterface;
 
@@ -39,6 +40,10 @@ export class ExpensesListComponent implements OnInit {
     this.selectedItem = index;
   }
 
+  updateExpenseListOnListChange() {
+    this.passUpdateExpenseListOnListChange.emit();
+    this.areShownDetails = false;
+  }
   // ngOnChanges() {
   //   console.log(this.expenseItems);
   // }

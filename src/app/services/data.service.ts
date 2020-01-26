@@ -11,6 +11,8 @@ export class DataService {
 
   private token: string = environment.TOKEN;
   private api_url: string = environment.API_URL;
+  private get_api_url: string;
+  private put_delete_api_url: string;
 
  httpOptions = {
     headers: new HttpHeaders({
@@ -22,11 +24,21 @@ export class DataService {
   constructor(private http:HttpClient) { }
   
   getExpenseItems(): Observable<Object> {
-    this.api_url = `${this.api_url}?offset=0&limit=50`;
-    return this.http.get(this.api_url, this.httpOptions)
+    this.get_api_url = `${this.api_url}?offset=0&limit=50`;
+    return this.http.get(this.get_api_url, this.httpOptions)
   }
 
-  postNewExpenseItem(body) {
+  postNewExpenseItem(body): Observable<Object> {
     return this.http.post(this.api_url, body, this.httpOptions)
+  }
+
+  deleteExpenseItem(id): Observable<Object> {
+    this.put_delete_api_url = `${this.api_url}/${id}`;
+    return this.http.delete(this.put_delete_api_url, this.httpOptions);
+  }
+  
+  putExpenseItem(id, body): Observable<Object> {
+    this.put_delete_api_url = `${this.api_url}/${id}`;
+    return this.http.put(this.put_delete_api_url, body, this.httpOptions)
   }
 }

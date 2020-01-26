@@ -1,1 +1,2 @@
-<div class='button' (click)='handleClick()'>{{buttonText}}</div>
+<div class='button' (click)='handleClick()'><p>{{buttonText}}</p></div>
+<div *ngIf='disabled' class='disabled-overlay'></div>
