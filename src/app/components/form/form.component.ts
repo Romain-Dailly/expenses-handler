@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CurrencyConversionService } from './../../services/currency-conversion.service';
 import { DataService } from './../../services/data.service';
 
@@ -14,6 +14,9 @@ export class FormComponent implements OnInit {
 
   private defaultFieldsContentForModificationForm;
 
+  @Input() itemToBeModified;
+  @Output() newExpenseCreated = new EventEmitter();
+  
   expenseDate :Date;
   expenseNature :string;
   expenseComment :string;
@@ -100,6 +103,7 @@ export class FormComponent implements OnInit {
         console.log(data);
 
         if (data) {
+          this.newExpenseCreated.emit();
           this.isExpenseSent = true;
           this.isExpenseSending = false;
           this.resetValuesAfterPost();
@@ -124,6 +128,16 @@ export class FormComponent implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
+
+    this.expenseDate = this.itemToBeModified.purchasedOn;
+    this.expenseNature = this.itemToBeModified.nature;
+    this.expenseOriginalAmountCurrency = this.itemToBeModified.originalAmount.currency;
+    this.expenseOriginalAmount = this.itemToBeModified.originalAmount.amount;
+    this.expenseConvertedAmount = this.itemToBeModified.convertedAmount.amount;
+    this.expenseComment = this.itemToBeModified.comment;
   }
 
 }

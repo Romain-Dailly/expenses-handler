@@ -9,8 +9,12 @@ import { DataService } from '../../services/data.service';
 })
 export class HomeComponent implements OnInit {
 
+  // provisory response
   private expenseItemsResponse;
+
   public expenseItems: ExpenseItemInterface[];
+
+  private subscriptionToData;
 
   isLoading: boolean = true;
   
@@ -18,9 +22,12 @@ export class HomeComponent implements OnInit {
 
   getExpensesFromApi() {
 
-    this.dataService.getExpenseItems().subscribe(
-      data => {
+    this.expenseItemsResponse = undefined;
+    this.expenseItems = undefined;
+    this.subscriptionToData !== undefined && this.subscriptionToData.unsubscribe();
 
+    this.subscriptionToData = this.dataService.getExpenseItems().subscribe(
+      data => {
       this.isLoading = true;
       this.expenseItemsResponse = data;
         
@@ -35,9 +42,19 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
+  // Event emmitted from form to update list
+  updateExpenseListOnListChange($event) {
+    this.getExpensesFromApi();
+  }
+
   ngOnInit() {
 
     this.getExpensesFromApi();
+  }
+
+  ngOnDestroy() {
+    this.subscriptionToData !== undefined && this.subscriptionToData.unsubscribe();
   }
 
 }

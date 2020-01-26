@@ -22,11 +22,11 @@ export class DataService {
   constructor(private http:HttpClient) { }
   
   getExpenseItems(): Observable<Object> {
+    this.api_url = `${this.api_url}?offset=0&limit=50`;
     return this.http.get(this.api_url, this.httpOptions)
   }
 
   postNewExpenseItem(body) {
     return this.http.post(this.api_url, body, this.httpOptions)
   }
-
 }

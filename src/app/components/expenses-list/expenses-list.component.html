@@ -3,8 +3,7 @@
 
   </div> -->
   
-  <div class ='expenses-list' >
-    <!-- <p>{{item.id}}</p> -->
+  <!-- <div class ='expenses-list' >
     <div class='expense' *ngFor='let item of expenseItems'>
       <div class='date'>
         <p>{{item.purchasedOn}}</p>
@@ -24,10 +23,34 @@
           <p><span class='amount'>{{item.convertedAmount.amount}}</span> {{item.convertedAmount.currency}}</p>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- <p>{{item.createdAt}}</p> -->
     <!-- <p>{{item.lastModifiedAt}}</p> -->
+  <!-- </div> -->
+  <div class='expenses-list'>
+    <div class='expense' *ngFor='let item of expenseItems; let i = index'>
+      <div class='expense-content' (click)='toggleDetails(i)'>
+        <div class='nature-comment'>
+          <div class='nature'>
+            <p title='Nature de la dépense'>{{item.nature}}</p>
+          </div>
+          <div class='comment'>
+            <p title='Commentaire'>{{item.comment}}</p>
+          </div>
+        </div>
+        <div class='date-amount'>
+          <div class='date'>
+            <p>{{item.purchasedOn}}</p>
+          </div>
+          <div class='converted-amount-currency'>
+            <p><span class='amount'>{{item.convertedAmount.amount}}</span> {{item.convertedAmount.currency}}</p>
+          </div>
+        </div>
+      </div>
+      <div class='details' *ngIf='selectedItem === i && areShownDetails' ><app-form [itemToBeModified]='shownExpenseItem'></app-form></div>
+    </div>
   </div>
     <!-- <p>{{item.createdAt}}</p> -->
     <!-- <p>{{item.lastModifiedAt}}</p> -->
 </div>
+<!-- [@slideInOut] à ajouter à ngIf pour animation entree sortie-->

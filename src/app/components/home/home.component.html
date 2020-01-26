@@ -1,4 +1,4 @@
-<app-nav></app-nav>
+<app-nav (passUpdateExpenseListOnListChange)='updateExpenseListOnListChange($event)'></app-nav>
 <p *ngIf='isLoading'>Loading</p>
 <app-expenses-list  *ngIf='expenseItems && isLoading===false' [expenseItems]='expenseItems'></app-expenses-list>
 

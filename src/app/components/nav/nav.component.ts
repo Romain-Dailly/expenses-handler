@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
+  @Output() passUpdateExpenseListOnListChange = new EventEmitter();
   constructor() { }
+
+  updateExpenseListOnListChange() {
+    this.passUpdateExpenseListOnListChange.emit();
+  }
 
   ngOnInit() {
   }
