@@ -7,24 +7,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StyledButtonComponent implements OnInit {
 
-  @Input() buttonText: string;
+  @Input() buttonSave: boolean;
   @Input() disabled: boolean;
+  @Input() roundButton: boolean;
 
-  // button use create, modify, delete
-  @Input() isButtonToCreateModifyOrDelete: string;
 
   constructor() { }
 
-  handleClick() {
-    
-    if (this.isButtonToCreateModifyOrDelete === 'create') {
-
-    } if (this.isButtonToCreateModifyOrDelete === 'modify') {
-
-    } if (this.isButtonToCreateModifyOrDelete === 'delete') {
-      
-    }
-  }
 
   ngOnInit() {
   }

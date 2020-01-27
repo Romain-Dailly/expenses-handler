@@ -1,32 +1,18 @@
 <div class='main-content'>
-  <!-- <div class='sort-header'>
-
-  </div> -->
   
-  <!-- <div class ='expenses-list' >
-    <div class='expense' *ngFor='let item of expenseItems'>
-      <div class='date'>
-        <p>{{item.purchasedOn}}</p>
-      </div>
-      <div class='expense-card'>
-        
-        <div class='nature'>
-          <p title='Nature de la dépense'>{{item.nature}}</p>
-        </div>
-        <div class='comment'>
-          <p title='Commentaire'>{{item.comment}}</p>
-        </div>
-        <div class='amount-currency'>
-          <p><span class='amount'>{{item.originalAmount.amount}}</span> {{item.originalAmount.currency}}</p>
-        </div>
-        <div class='converted-amount-currency'>
-          <p><span class='amount'>{{item.convertedAmount.amount}}</span> {{item.convertedAmount.currency}}</p>
-        </div>
-      </div>
-    </div> -->
-    <!-- <p>{{item.createdAt}}</p> -->
-    <!-- <p>{{item.lastModifiedAt}}</p> -->
-  <!-- </div> -->
+  <!--Div to show creation form-->
+  <div 
+    class='creation-form' 
+    *ngIf='isCreationFormOpened' 
+    [@slideInOut]>
+    <app-form 
+      [itemToBeModified]='undefined' 
+      (expensesListModified)='updateExpenseListOnListChange()'
+      (formHasToClose)='handleFormClose($event)'>
+    </app-form>
+  </div>
+
+  <!--Expenses list-->
   <div class='expenses-list'>
     <div class='expense' *ngFor='let item of expenseItems; let i = index'>
       <div class='expense-content' (click)='toggleDetails(i)' title='Cliquez pour modifier'>
@@ -40,17 +26,36 @@
         </div>
         <div class='date-amount'>
           <div class='date'>
-            <p>{{item.purchasedOn}}</p>
+            <p>{{item.purchasedOn | date:'d/MM/yyyy'}}</p>
           </div>
           <div class='converted-amount-currency'>
             <p><span class='amount'>{{item.convertedAmount.amount}}</span> {{item.convertedAmount.currency}}</p>
           </div>
         </div>
       </div>
-      <div class='details' *ngIf='selectedItem === i && areShownDetails' ><app-form [itemToBeModified]='shownExpenseItem' (expensesListModified)='updateExpenseListOnListChange()'></app-form></div>
+
+      <!-- Div to show modification form-->
+      <div 
+        class='details' 
+        *ngIf='selectedItem === i && areShownDetails' 
+        [@slideInOut]>
+        <app-form 
+          [itemToBeModified]='shownExpenseItem' 
+          (expensesListModified)='updateExpenseListOnListChange()'
+          (formHasToClose)='handleFormClose($event)'>
+        </app-form>
+      </div>
     </div>
   </div>
-    <!-- <p>{{item.createdAt}}</p> -->
-    <!-- <p>{{item.lastModifiedAt}}</p> -->
+
+  <!--Creation button-->
+  <app-styled-button 
+  *ngIf='!areShownDetails && !isCreationFormOpened' 
+  class='creation-button' 
+  [roundButton]='true' 
+  [buttonSave]='false' 
+  [disabled]='false' 
+  (click)='createNewExpense()'
+  [@opacityInOut]>
+  </app-styled-button>  
 </div>
-<!-- [@slideInOut] à ajouter à ngIf pour animation entree sortie-->

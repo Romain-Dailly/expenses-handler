@@ -17,11 +17,11 @@ export class FormComponent implements OnInit {
 
   @Input() itemToBeModified;
   @Output() expensesListModified = new EventEmitter();
+  @Output() formHasToClose = new EventEmitter();
   
   // handling form type (creation, modification)
   formType: string;
   formTitle: string;
-  buttonText: string;
   showDeleteButton: boolean;
   deleteButtonText: string = 'Supprimer';
 
@@ -94,12 +94,13 @@ export class FormComponent implements OnInit {
     }
   }
 
+  // convert if necessary
   convertToEuros() {
 
-    if (this.expenseOriginalAmountCurrency === 'EUR' && this.expenseConvertedAmount) { 
+    if (this.expenseOriginalAmountCurrency === 'EUR') { 
       this.expenseConvertedAmount = this.expenseOriginalAmount;
       this.isConversionLoading = false;
-      this.isConversionDone = false;
+      this.isConversionDone = true;
     } else {
       this.isConversionLoading = true;
       this.isConversionDone = false;
@@ -118,6 +119,13 @@ export class FormComponent implements OnInit {
     }
   }
 
+  //
+  closeForm() {
+    this.formHasToClose.emit();
+    console.log('envoi form');
+  }
+
+  // Post a new expense
   postOnExpenseCreation() {
 
     const expenseForPost = {
@@ -152,6 +160,7 @@ export class FormComponent implements OnInit {
     )
   }
 
+  // Modify an expense
   putOnExpenseModification() {
     
     const expenseForPut = {
@@ -186,24 +195,21 @@ export class FormComponent implements OnInit {
     )
   }
 
+  // Handle form submission
   onSubmit() {
     if (this.formType === 'create') {
-
       this.postOnExpenseCreation();
-
     } else if (this.formType === 'modify') {
-
       this.putOnExpenseModification();
-
     }
   }
 
+  // Handle delete expense
   handleDelete() {
     console.log(this.itemToBeModified.id);
     this.dataService.deleteExpenseItem(this.itemToBeModified.id).subscribe(
       data => {
         this.isExpenseSending = true;
-        this.buttonText = 'Envoi ...'
         this.expensesListModified.emit();
         this.isExpenseSent = true;
         this.isExpenseSending = false;
@@ -215,6 +221,7 @@ export class FormComponent implements OnInit {
     )
   }
 
+  // Empty form properties
   resetValuesAfterPost() {
 
     this.expenseDate = undefined;
@@ -236,7 +243,7 @@ export class FormComponent implements OnInit {
     // Store new changes
     this.itemOnFormOpening = changes.itemToBeModified.currentValue;
 
-    // If an item is in the input, set inputs values and form type
+    // If an item is in the input, set inputs values and form typestyle='color:white; font-size:36px; z-index:10;padding-top:0.2em;'
     if (this.itemToBeModified) {
 
       this.itemToBeModified.originalAmount.currency === 'EUR' ? this.isConversionDone = false : this.isConversionDone = true;
@@ -247,13 +254,11 @@ export class FormComponent implements OnInit {
       this.expenseConvertedAmount = this.itemToBeModified.convertedAmount.amount;
       this.expenseComment = this.itemToBeModified.comment;
       this.formType = 'modify';
-      this.formTitle = 'Modification';
-      this.buttonText = 'Modifier';
+      this.formTitle = 'Modifier';
       this.showDeleteButton = true;
     } else {
       this.formType= 'create';
-      this.formTitle = 'Création';
-      this.buttonText = 'Créer';
+      this.formTitle = 'Créer';
       this.showDeleteButton = false;
     }
   }

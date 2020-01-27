@@ -1,2 +1,6 @@
-<div class='button' (click)='handleClick()'><p>{{buttonText}}</p></div>
+<div *ngIf='!roundButton' class='button'>
+  <i *ngIf='buttonSave' class="fas fa-save"></i>
+  <i *ngIf='!buttonSave' class="fas fa-trash"></i>
+</div>
+<div *ngIf='roundButton' class='roundButton'><i class="fas fa-plus"></i></div>
 <div *ngIf='disabled' class='disabled-overlay'></div>

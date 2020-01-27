@@ -10,6 +10,11 @@ import { ExpensesListComponent } from './components/expenses-list/expenses-list.
 import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
 import { StyledButtonComponent } from './components/styled-button/styled-button.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { LOCALE_ID } from '@angular/core';
+
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -27,7 +32,8 @@ import { StyledButtonComponent } from './components/styled-button/styled-button.
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ { provide: LOCALE_ID, useValue: "fr-FR" }],
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

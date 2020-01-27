@@ -11,18 +11,50 @@
   box-shadow: 0 1px 10px rgba(0,0,0,0.2);
   transition: background .3s ease-in-out;
 }
-.button:hover {
+.roundButton {
+  z-index:2;
+  cursor:pointer;
+  width: 50px;
+  height:50px;
+  border-radius: 40px 40px 40px 40px;
+  background-color:rgb(255, 191, 23);
+  text-align:center;
+  vertical-align: center;
+  padding:15px;
+  box-shadow: 0 1px 10px rgba(0,0,0,0.2);
+  transition: background .3s ease-in-out;
+}
+.button:hover, .roundButton:hover {
   background-color:rgb(255, 102, 0);
   top:1px;
 }
-.button:active {
-  
+.button:active, .roundButton:active {
+  position:relative;
+  background-color:rgb(255, 191, 23);
+  top:1px;
 }
-.button p {
+.button p, .roundButton p {
   text-shadow: 1px 1px 1px rgba(0,0,0,.1);
   text-transform: uppercase;
   font-weight: 600;
   color:white;
+}
+.fa-save {
+  color:white;
+  font-size:36px;
+  padding-top:0.2em;
+}
+.fa-trash {
+  color:white;
+  font-size:32px;
+  z-index:10;
+  padding-top:0.3em;
+}
+.fa-plus {
+  color:white;
+  font-size:36px;
+  z-index:10;
+  padding-top:0.2em;
 }
 .disabled-overlay {
   position: relative;

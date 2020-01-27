@@ -9,13 +9,22 @@ import { trigger, transition, animate, style } from '@angular/animations';
   animations: [
     trigger('slideInOut', [
       transition(':enter', [
-        style({transform: 'translateY(-100%)'}),
-        animate('300ms ease-in', style({transform: 'translateY(0%)'}))
+        style({ transform: 'translateY(-100%)', opacity: 0 }),
+        animate('300ms ease-in', style({transform: 'translateY(0%)', opacity:1}))
       ]),
       transition(':leave', [
-        animate('300ms ease-in', style({transform: 'translateY(-100%)'}))
+        animate('200ms ease-in', style({transform: 'translateY(-100%)', opacity:1}))
       ])
-    ])
+    ]),
+    trigger('opacityInOut', [
+      transition(':enter', [
+        style({opacity:0}),
+        animate('200ms ease-in', style({opacity:1}))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({opacity:0}))
+      ])
+    ]),
   ]
 })
 export class ExpensesListComponent implements OnInit {
@@ -26,6 +35,9 @@ export class ExpensesListComponent implements OnInit {
 
   selectedItem: number;
   areShownDetails: boolean = false;
+  isCreationFormOpened: boolean = false;
+
+  creationButtonText: string = '+';
 
   constructor() { }
 
@@ -36,13 +48,34 @@ export class ExpensesListComponent implements OnInit {
   toggleDetails(index) {
 
     this.shownExpenseItem = this.expenseItems[index];
-    this.selectedItem !== index ? this.areShownDetails = true : this.areShownDetails = !this.areShownDetails;
-    this.selectedItem = index;
+    if (this.isCreationFormOpened) {
+      this.areShownDetails = false;
+      this.isCreationFormOpened = false;
+    } else if (this.selectedItem !== index && this.areShownDetails === true) {
+      this.areShownDetails = false;
+    } else {
+      this.selectedItem = index;
+      this.areShownDetails = !this.areShownDetails;
+    }
   }
 
+  // Event emitted on form
   updateExpenseListOnListChange() {
     this.passUpdateExpenseListOnListChange.emit();
     this.areShownDetails = false;
+    this.isCreationFormOpened = false;
+  }
+
+  // Event emitted to close Form 
+  handleFormClose($event) {
+    console.log('recu dans list');
+    this.areShownDetails = false;
+    this.isCreationFormOpened = false;
+  }
+  
+  // Handle creation button click
+  createNewExpense() {
+    this.isCreationFormOpened = true;
   }
   // ngOnChanges() {
   //   console.log(this.expenseItems);

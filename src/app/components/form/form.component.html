@@ -1,12 +1,13 @@
 
 <div class='form'>
+  <div class='close'><i class='fas fa-times'(click)='closeForm()'></i></div>
   <h3>{{formTitle}}</h3>
   <div class='form-content'>
     <div class='left-part'>
       <label>Nature</label>
       <input name="expenseNature" type="text" maxlength='120' [(ngModel)]="expenseNature"(ngModelChange)='onInputChange()' placeholder='Voyage, Restaurant ...'/>
       <label>Commentaire</label>
-      <input name="expenseComment" type="text" maxlength='600' [(ngModel)]="expenseComment"(ngModelChange)='onInputChange()' placeholder='Séminaire à Londres ...'/>
+      <textarea name="expenseComment" rows='3' maxlength='600' [(ngModel)]="expenseComment"(ngModelChange)='onInputChange()' placeholder='Séminaire à Londres ...'></textarea>
     </div>
     <div class='right-part'>
       <label>Date</label>
@@ -14,19 +15,27 @@
       <label>Montant Initial</label>
       <input class='number-input' name="expenseOriginalAmount" type="number" [(ngModel)]="expenseOriginalAmount"(ngModelChange)='onAmountInputChange()' placeholder='Montant dans la devise de la dépense'/>
       <label>Devise</label>
-      <select name="expenseOriginalAmountCurrency" type="select" [(ngModel)]="expenseOriginalAmountCurrency" (ngModelChange)='onAmountInputChange()' placeholder='USD'>
+      <select name="expenseOriginalAmountCurrency" type="select" [(ngModel)]="expenseOriginalAmountCurrency" (ngModelChange)='onAmountInputChange()' placeholder='EUR'>
         <option value='EUR'>EUR</option>
         <option value='CHF'>CHF</option>
         <option value='GBP'>GBP</option>
         <option value='USD'>USD</option>
       </select>
-      <p *ngIf='isConversionLoading'>Conversion en cours ...</p>
-      <label *ngIf='isConversionDone'>Montant en Euros</label>
-      <p class='converted-amount' *ngIf='isConversionDone'>{{expenseConvertedAmount}} {{expenseConvertedAmountCurrency}}</p>
+      
+      <!-- <label >Montant en Euros</label>
+      <p class='converted-amount' >
+        <span *ngIf='isConversionDone' class='convertedAmount'>{{expenseConvertedAmount}} {{expenseConvertedAmountCurrency}}</span>
+        <span *ngIf='isConversionLoading'>Conversion en cours ...</span>
+      </p> -->
     </div>
   </div>
+  <label >Montant en Euros</label>
+  <p class='converted-amount' >
+    <span *ngIf='isConversionDone' class='convertedAmount'>{{expenseConvertedAmount}} {{expenseConvertedAmountCurrency}}</span>
+    <span *ngIf='isConversionLoading'>Conversion en cours ...</span>
+  </p>
     <div class ='buttons'>
-      <app-styled-button [buttonText]='buttonText' [disabled]='isButtonDisabled' [isButtonToCreateModifyOrDelete]=''(click)='onSubmit()'></app-styled-button>
-      <app-styled-button *ngIf='showDeleteButton' [buttonText]='deleteButtonText' [disabled]='false' [isButtonToCreateModifyOrDelete]='' (click)='handleDelete()'></app-styled-button>
+      <app-styled-button [roundButton]='false' [buttonSave]='true' [disabled]='isButtonDisabled' (click)='onSubmit()'></app-styled-button>
+      <app-styled-button *ngIf='showDeleteButton' [buttonSave]='false' [disabled]='false' (click)='handleDelete()'></app-styled-button>
     </div>
 </div>
