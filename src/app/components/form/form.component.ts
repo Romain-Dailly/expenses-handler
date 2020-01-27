@@ -58,9 +58,13 @@ export class FormComponent implements OnInit {
               ) { }
 
   
-  // Handle inputs change, if amount and currency are filled, launch euros conversion
+
   onInputChange() {
-    
+  this.setIsButtonDisabled();
+  }
+
+  // Handle  amount inputs change, if amount and currency are filled, launch euros conversion
+  onAmountInputChange() {
     if (this.expenseOriginalAmountCurrency && this.expenseOriginalAmount) {
       this.convertToEuros();      
     } this.setIsButtonDisabled();
@@ -78,10 +82,10 @@ export class FormComponent implements OnInit {
 
     } else if (this.formType === 'modify') { 
 
-      if (this.expenseDate !== this.itemOnFormOpening.purchasedOn &&
-        this.expenseNature !== this.itemOnFormOpening.nature &&
-        this.expenseOriginalAmountCurrency !== this.itemOnFormOpening.originalAmount.currency &&
-        this.expenseOriginalAmount !== this.itemOnFormOpening.originalAmount.amount &&
+      if (this.expenseDate !== this.itemOnFormOpening.purchasedOn ||
+        this.expenseNature !== this.itemOnFormOpening.nature ||
+        this.expenseOriginalAmountCurrency !== this.itemOnFormOpening.originalAmount.currency ||
+        this.expenseOriginalAmount !== this.itemOnFormOpening.originalAmount.amount ||
         this.expenseComment !== this.itemOnFormOpening.comment) {  
         this.isButtonDisabled = false;
       } else {
@@ -92,12 +96,13 @@ export class FormComponent implements OnInit {
 
   convertToEuros() {
 
-    this.isConversionLoading = true;
     if (this.expenseOriginalAmountCurrency === 'EUR' && this.expenseConvertedAmount) { 
       this.expenseConvertedAmount = this.expenseOriginalAmount;
       this.isConversionLoading = false;
-      this.isConversionDone = true;
+      this.isConversionDone = false;
     } else {
+      this.isConversionLoading = true;
+      this.isConversionDone = false;
       this.currencyConversionService.getCoefficientToEuros(this.expenseOriginalAmountCurrency).subscribe(
         data => {
           this.coefficientToEuros = data;
@@ -198,6 +203,7 @@ export class FormComponent implements OnInit {
     this.dataService.deleteExpenseItem(this.itemToBeModified.id).subscribe(
       data => {
         this.isExpenseSending = true;
+        this.buttonText = 'Envoi ...'
         this.expensesListModified.emit();
         this.isExpenseSent = true;
         this.isExpenseSending = false;
@@ -232,6 +238,8 @@ export class FormComponent implements OnInit {
 
     // If an item is in the input, set inputs values and form type
     if (this.itemToBeModified) {
+
+      this.itemToBeModified.originalAmount.currency === 'EUR' ? this.isConversionDone = false : this.isConversionDone = true;
       this.expenseDate = this.itemToBeModified.purchasedOn;
       this.expenseNature = this.itemToBeModified.nature;
       this.expenseOriginalAmountCurrency = this.itemToBeModified.originalAmount.currency;

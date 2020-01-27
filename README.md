@@ -2,19 +2,31 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0-rc.9.
 
+## About
+
+Front-end Single page application to display and handle expenses, for employees to get paid back.
+
+## Installation / Getting started
+
+* [Download the installer](https://nodejs.org/) for Node.js.
+* Install the angular CLI globally: `npm install -g @angular/cli@9.0.0-rc.9`.
+* Clone this repository: `git clone https://github.com/Romain-Dailly/expenses-handler.git`.
+* Run `npm install` from the project root.
+* Run `ng serve` or `npm run start` in a terminal from the project root.
+
 ## Environment
 
 Set values of your TOKEN and APIKEY in `environment.example.ts` and then change the file name to `environment.ts` for developpment purpose.
 For production build, copy the content of the file in `environment.prod.ts`.
-For currency conversion to euros API, set url and token in the file.
+For currency conversion to euros API, create an account on `https://free.currconv.com/`, and add your api key to the `environment.ts` file in `CURRENCYCONVERTER_APIKEY` property.
 
-## API calls
+### API calls
 
-### External calls to API
-To call API during developpment, because of CORS in browser, if you're not locally developping the project, use a proxy.
-Change the `proxy.config.example.json` in root folder to `proxy.config.json` and set the header's authorization's value with your token.
+#### External calls to API
+To call API during developpment, because of CORS in browsers, if you're not locally developping the project, use a proxy.
+Change the `proxy.config.example.json` in root folder to `proxy.config.json` and set API_URL in `environment.ts` file to `'/api'`.
 
-### Local calls to API
+#### Local calls to API
 To call the API just set the API_URL in `environment.ts`.
 
 

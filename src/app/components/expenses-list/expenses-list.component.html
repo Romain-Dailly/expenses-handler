@@ -29,13 +29,13 @@
   <!-- </div> -->
   <div class='expenses-list'>
     <div class='expense' *ngFor='let item of expenseItems; let i = index'>
-      <div class='expense-content' (click)='toggleDetails(i)'>
+      <div class='expense-content' (click)='toggleDetails(i)' title='Cliquez pour modifier'>
         <div class='nature-comment'>
           <div class='nature'>
             <p title='Nature de la dépense'>{{item.nature}}</p>
           </div>
           <div class='comment'>
-            <p title='Commentaire'>{{item.comment}}</p>
+            <p>{{item.comment}}</p>
           </div>
         </div>
         <div class='date-amount'>

@@ -4,25 +4,25 @@
   <div class='form-content'>
     <div class='left-part'>
       <label>Nature</label>
-      <input name="expenseNature" type="text" [(ngModel)]="expenseNature"(change)='onInputChange()' placeholder='Voyage, Restaurant ...'/>
+      <input name="expenseNature" type="text" maxlength='120' [(ngModel)]="expenseNature"(ngModelChange)='onInputChange()' placeholder='Voyage, Restaurant ...'/>
       <label>Commentaire</label>
-      <input name="expenseComment" type="text" [(ngModel)]="expenseComment"(change)='onInputChange()' placeholder='Séminaire à Londres ...'/>
+      <input name="expenseComment" type="text" maxlength='600' [(ngModel)]="expenseComment"(ngModelChange)='onInputChange()' placeholder='Séminaire à Londres ...'/>
     </div>
     <div class='right-part'>
       <label>Date</label>
-      <input class='date' name="expenseDate" type="date"[(ngModel)]="expenseDate" (change)='onInputChange()'/>
+      <input class='date' name="expenseDate" type="date"[(ngModel)]="expenseDate" (ngModelChange)='onInputChange()'/>
       <label>Montant Initial</label>
-      <input class='number-input' name="expenseOriginalAmount" type="number" [(ngModel)]="expenseOriginalAmount"(change)='onInputChange()' placeholder='Montant dans la devise de la dépense'/>
+      <input class='number-input' name="expenseOriginalAmount" type="number" [(ngModel)]="expenseOriginalAmount"(ngModelChange)='onAmountInputChange()' placeholder='Montant dans la devise de la dépense'/>
       <label>Devise</label>
-      <select name="expenseOriginalAmountCurrency" type="select" [(ngModel)]="expenseOriginalAmountCurrency" (change)='onInputChange()' placeholder='USD'>
+      <select name="expenseOriginalAmountCurrency" type="select" [(ngModel)]="expenseOriginalAmountCurrency" (ngModelChange)='onAmountInputChange()' placeholder='USD'>
         <option value='EUR'>EUR</option>
         <option value='CHF'>CHF</option>
         <option value='GBP'>GBP</option>
         <option value='USD'>USD</option>
       </select>
-      <p *ngIf='isConversionLoading'>loading</p>
+      <p *ngIf='isConversionLoading'>Conversion en cours ...</p>
       <label *ngIf='isConversionDone'>Montant en Euros</label>
-      <p *ngIf='isConversionDone'>{{expenseConvertedAmount}} {{expenseConvertedAmountCurrency}}</p>
+      <p class='converted-amount' *ngIf='isConversionDone'>{{expenseConvertedAmount}} {{expenseConvertedAmountCurrency}}</p>
     </div>
   </div>
     <div class ='buttons'>
