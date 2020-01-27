@@ -1,4 +1,31 @@
 <div class='topnav'>
   <h3>Mes notes de frais</h3>
-  <div class='sort-header'></div>
+  <div class='sort-header'>
+    <i class="fas fa-sliders-h" (click)='toggleSortHeader()'></i>
+  </div>
+</div>
+<div *ngIf='showSortHeader' class='sort-expenses-header'[@slideInOut]>
+  <p>Classer</p>
+  <div class='settings'>
+    <div class='expenses-per-page'>
+      <label>Page</label>
+      <select [(ngModel)]="numberPerPage" (ngModelChange)='onNumberPerPageChange()'>
+        <option value='5'>5 notes</option>
+        <option value='10'>10 notes</option>
+        <option value='15'>15 notes</option>
+        <option value='20'>20 notes</option>
+        <option value='25'>25 notes</option>
+        <option value='50'>50 notes</option>
+      </select>
+    </div>
+    <div class='order-by'>
+      <label>Trier par</label>
+      <select [(ngModel)]="orderBy" (ngModelChange)='onOrderChange()'>
+        <option value='asc-date'>Ancien</option>
+        <option value='asc-amount'>Montant -</option>
+        <option value='desc-date'>Récent </option>
+        <option value='desc-amount'>Montant +</option>
+      </select>   
+    </div> 
+  </div>
 </div>

@@ -52,6 +52,8 @@ export class FormComponent implements OnInit {
   isExpenseSent: boolean = false;
   isExpenseSending: boolean = false;
 
+  // Handle error
+  error: boolean = false;
 
   constructor(private dataService: DataService,
               private currencyConversionService: CurrencyConversionService
@@ -155,6 +157,7 @@ export class FormComponent implements OnInit {
         }    
       },
       error => {
+        this.error = true;
         console.log(error);
       }
     )
@@ -190,6 +193,7 @@ export class FormComponent implements OnInit {
         }    
       },
       error => {
+        this.error = true;
         console.log(error);
       }
     )
@@ -216,6 +220,7 @@ export class FormComponent implements OnInit {
         this.resetValuesAfterPost();
       },
       error => {
+        this.error = true;
         console.log(error);
       }
     )
@@ -232,6 +237,7 @@ export class FormComponent implements OnInit {
     this.expenseComment = undefined;
     this.isConversionDone = false;
     this.itemToBeModified = undefined;
+    this.error = false;
   }
 
 

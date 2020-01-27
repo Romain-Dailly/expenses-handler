@@ -5,7 +5,7 @@
   align-content: center;
   text-align:center;
   overflow: hidden;
-  background-color:rgb(117, 193, 148);
+  background-color:rgb(132, 211, 163);
   margin-bottom:2em;
   cursor:default;
 }
@@ -55,6 +55,10 @@
 .close .fa-times:hover {
   color:rgb(255, 191, 23);
 }
+.error {
+  color:red;
+  padding-top:2em;
+}
 h3 {
   text-transform: uppercase;
   color:white;
@@ -63,38 +67,33 @@ h3 {
 }
 label {
   text-transform:uppercase;
-  font-size:12px;
+  font-size:14px;
   font-weight: 600;
-  color:RGB(150,150,150),
+  color:rgb(240,240,240);
 }
-input {
+input, textarea {
   border-radius:5px 5px 5px 5px;
-  color: RGB(100,100,100);
+  color: RGB(70,70,70);
   background-color:RGB(225,225,225);
   font-family: 'Roboto';
-  font-size:16px;
+  font-size:17px;
+  font-weight:600;
   border: none;
   height:2.5em;
   margin-bottom:1em;
   text-align:center;
 }
 textarea {
-  border-radius:5px 5px 5px 5px;
-  color: RGB(100,100,100);
-  background-color:RGB(225,225,225);
-  font-family: 'Roboto';
-  font-size:16px;
-  border: none;
   height: 6em;
-  margin-bottom:1em;
-  text-align:center;
   width: 26em;
 }
 .converted-amount{
   border-radius:5px 5px 5px 5px;
-  color: RGB(100,100,100);
+  color: RGB(70,70,70);
   background-color:RGB(225,225,225);
   font-family: 'Roboto';
+  font-size:18px;
+  font-weight:600;
   border: none;
   height:2em;
   width:8em;
@@ -110,7 +109,8 @@ select{
   -webkit-appearance: none;
   -moz-appearance: none;
   border-radius:5px 5px 5px 5px;
-  color: RGB(100,100,100);
+  color: RGB(70,70,70);
+  font-weight:600;
   background-color:RGB(225,225,225);
   font-family: 'Roboto';
   border: none;
@@ -135,7 +135,7 @@ input[type=number] {
   width:15em;
   -moz-appearance:textfield;
 }
-@media screen and (max-width:1000px) {
+@media screen and (max-width:600px) {
   textarea {
     width: 10em;
     height: 6em;
@@ -152,5 +152,8 @@ input[type=number] {
   }
   input[type=date] {
     width:8em;
+  }
+  label {
+    font-size:12px;
   }
 }

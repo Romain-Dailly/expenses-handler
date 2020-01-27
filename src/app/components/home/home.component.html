@@ -1,4 +1,4 @@
-<app-nav ></app-nav>
+<app-nav (numberPerPageChange)='handleNumberPerPageChange($event)' (orderByChange)='handleOrderByChange($event)'></app-nav>
 <p *ngIf='isLoading'>Loading</p>
 <app-expenses-list  *ngIf='expenseItems && isLoading===false' [expenseItems]='expenseItems' (passUpdateExpenseListOnListChange)='updateExpenseListOnListChange($event)'></app-expenses-list>
 

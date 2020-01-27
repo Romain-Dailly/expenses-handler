@@ -23,8 +23,9 @@ export class DataService {
 
   constructor(private http:HttpClient) { }
   
-  getExpenseItems(): Observable<Object> {
-    this.get_api_url = `${this.api_url}?offset=0&limit=50`;
+  // Get the filters as parameter and set the request url
+  getExpenseItems(filters): Observable<Object> {
+    this.get_api_url = `${this.api_url}?offset=0&limit=${filters.numberPerPage}`;
     return this.http.get(this.get_api_url, this.httpOptions)
   }
 

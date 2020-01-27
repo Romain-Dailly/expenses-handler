@@ -38,4 +38,5 @@
       <app-styled-button [roundButton]='false' [buttonSave]='true' [disabled]='isButtonDisabled' (click)='onSubmit()'></app-styled-button>
       <app-styled-button *ngIf='showDeleteButton' [buttonSave]='false' [disabled]='false' (click)='handleDelete()'></app-styled-button>
     </div>
+    <div *ngIf='error' class='error'>Erreur lors de l'envoi</div>
 </div>
