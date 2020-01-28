@@ -20,7 +20,7 @@ Set values of your TOKEN and APIKEY in `environment.example.ts` and then change 
 For production build, copy the content of the file in `environment.prod.ts`.
 
 For currency conversion to euros API : 
-* Create an account on `https://free.currconv.com/`
+* Create an account on [https://free.currconv.com/](https://free.currconv.com/).
 * Add your api key to the `environment.ts` file in `CURRENCYCONVERTER_APIKEY` property.
 
 You can set defaults : 
