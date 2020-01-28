@@ -7,18 +7,22 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+  
+  
 export class DataService {
 
+  
   // Api key
-  private token: string = environment.TOKEN;
+  private token:string = environment.TOKEN;
   // Api base url
-  private api_url: string = environment.API_URL;
+  private api_url:string = environment.API_URL;
   // Api url with parameters
-  private get_api_url: string;
+  private get_api_url:string;
   // Api url with id in parameters
-  private put_delete_api_url: string;
+  private put_delete_api_url:string;
 
- httpOptions = {
+
+  httpOptions = {
     headers: new HttpHeaders({
       'Authorization': `Bearer ${this.token}`,
       'accept': 'application/json',

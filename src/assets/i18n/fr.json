@@ -1,0 +1,27 @@
+{
+
+  "title":"Mes notes de frais",
+  "error":"oups, une erreur est survenue, rafraichissez la page ...",
+  "expenseNature":"Nature du frais",
+  "expenseComment":"Commentaire",
+  "expenseDate":"Date",
+  "expenseOriginalAmount":"Montant initial",
+  "expenseConvertedAmount":"Montant en euros",
+  "expenseCurrency":"Devise",
+  "creationTitle": "Nouvelle",
+  "creationLongTitle":" note",
+  "modificationTitle":"Editer",
+  "save":"Enregistrer",
+  "delete":"Supprimer",
+  "expenseHoverTitle":"Cliquez pour modifier",
+  "formError":"Erreur lors de l'envoi",
+  "sortheaderTitle":"Classer",
+  "numberPerPageLabel":"Par page",
+  "numberPerPageExpense":"notes",
+  "orderByLabel":"Trier par",
+  "orderByDateRecent":"Récent",
+  "orderByDateOld":"Ancien",
+  "orderByAmount":"Montant"
+
+
+}

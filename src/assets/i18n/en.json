@@ -1,0 +1,27 @@
+{
+
+  "title":"My expenses report",
+  "error":"oups, an error occured, refresh page ...",
+  "expenseNature":"Expense nature",
+  "expenseComment":"Comment",
+  "expenseDate":"Date",
+  "expenseOriginalAmount":"Original amount",
+  "expenseConvertedAmount":"Amount in euros",
+  "expenseCurrency":"Currency",
+  "creationTitle": "New",
+  "creationLongTitle":" report",
+  "modificationTitle":"Edit",
+  "save":"Save",
+  "delete":"Delete",
+  "expenseHoverTitle":"Click to modify",
+  "formError":"Error when sending ...",
+  "sortheaderTitle":"Rank",
+  "numberPerPageLabel":"Per page",
+  "numberPerPageExpense":"reports",
+  "orderByLabel":"Sort by",
+  "orderByDateRecent":"Recent",
+  "orderByDateOld":"Older",
+  "orderByAmount":"Amount"
+
+
+}

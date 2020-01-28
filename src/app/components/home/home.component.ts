@@ -1,42 +1,62 @@
 import { Component, OnInit } from '@angular/core';
+
 import { DataService } from '../../services/data.service';
+import { TranslateService } from '@ngx-translate/core';
+
 import { ExpenseItemInterface } from './../../interfaces/expense-item.interface';
+import { FiltersForRequest } from './../../interfaces/filters-for-requests.interface';
+import { Subscription } from 'rxjs';
+
 import { environment } from './../../../environments/environment';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+  
+  
 export class HomeComponent implements OnInit {
 
+  
   // Provisory response from api to be computed 
-  private expenseItemsResponse;
+  private expenseItemsResponse:any;
 
   // Items got from provisory response
-  public expenseItems: ExpenseItemInterface[];
+  public expenseItems:ExpenseItemInterface[];
 
   // Filters for data requests, defaults in environment file
-  filters = {
+  filters:FiltersForRequest = {
     numberPerPage: environment.DEFAULT_NUMBER_EXPENSES_PER_PAGE,
     offset: environment.DEFAULT_OFFSET
   };
   
   // Subscription to the data service
-  private subscriptionToData;
+  private subscriptionToData:Subscription;
 
-  // Handle display of toggled sort-expenses-header and loading on requests
+  // Handle display of toggled sort-expenses-header
   hideSortExpensesHeader: boolean = false;
-  isLoading: boolean = true;
-  
-  constructor(private dataService:DataService) { }
+  //handle loading on requests and errors
+  isLoading:boolean = true;
+  isError:boolean = false;
 
-  // Handle emitters from nav sort-expenses-header and recall api
-  handleNumberPerPageChange($event) {
+
+  constructor(private dataService: DataService, public translateService: TranslateService) { 
+  }
+  
+  // Change language
+  switchLang($event: string):void {
+    this.translateService.use($event);
+  }
+
+  // Handle emitters from nav sort-expenses-header and recall api with filters modified
+  handleNumberPerPageChange($event: number):void {
     this.filters.numberPerPage = $event;
     this.getExpensesFromApi(this.filters);
   }
-  handleOrderByChange($event) {
+
+  handleOrderByChange($event:string):void {
     // Order list depending on applyied filter
     if ($event === 'desc-date') {
       this.expenseItems = this.expenseItems.sort(
@@ -54,12 +74,13 @@ export class HomeComponent implements OnInit {
   }
 
   // Api call through data service
-  getExpensesFromApi(filters) {
+  getExpensesFromApi(filters:FiltersForRequest):void {
 
     // Reset values before calling api
     this.expenseItemsResponse = undefined;
     this.expenseItems = undefined;
     this.subscriptionToData !== undefined && this.subscriptionToData.unsubscribe();
+    this.isError = false;
     this.isLoading = true;
     // Send filters to the service to set request url
     this.subscriptionToData = this.dataService.getExpenseItems(filters).subscribe(
@@ -72,14 +93,14 @@ export class HomeComponent implements OnInit {
         this.isLoading = false;
       },
       error => {
-
+        this.isError = true;
         console.log(error);
       }
     ); 
   }
 
   // Event emmitted from form to update list
-  updateExpenseListOnListChange($event) {
+  updateExpenseListOnListChange():void {
 
     this.hideSortExpensesHeader = true;
     this.getExpensesFromApi(this.filters);
@@ -88,8 +109,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Set locale in translateService
+    this.translateService.use(environment.DEFAULT_LANGUAGE);
 
-      this.getExpensesFromApi(this.filters);
+    // Get expenses list
+    this.getExpensesFromApi(this.filters);
   }
 
   ngOnDestroy() {

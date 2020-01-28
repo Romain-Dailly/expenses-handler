@@ -5,12 +5,12 @@
     <i class='fas fa-times'(click)='closeForm()'></i>
   </div>
   <!--Title and long title for large devices-->
-  <h3>{{formTitle}}<span class='long-title'> note</span></h3>
+  <h3>{{formTitle | translate}}<span class='long-title'> {{'creationLongTitle' | translate}}</span></h3>
 
   <div class='form-content'>
     <div class='left-part'>
       
-      <label>Nature</label>
+      <label>{{'expenseNature' | translate}}</label>
       <input
       name="expenseNature"
       type="text"
@@ -19,7 +19,7 @@
       (ngModelChange)='onInputChange()'
       placeholder='Voyage, Restaurant ...'/>
 
-      <label>Commentaire</label>
+      <label>{{'expenseComment' | translate}}</label>
       <textarea
       name="expenseComment" 
       ows='3' maxlength='600'
@@ -31,7 +31,7 @@
 
     <div class='right-part'>
 
-      <label>Date</label>
+      <label>{{'expenseDate' | translate}}</label>
       <input
       class='date'
       name="expenseDate"
@@ -39,7 +39,7 @@
       [(ngModel)]="expenseDate"
       (ngModelChange)='onInputChange()'/>
 
-      <label>Montant Initial</label>
+      <label>{{'expenseOriginalAmount' | translate}}</label>
       <input
       class='number-input'
       name="expenseOriginalAmount"
@@ -48,7 +48,7 @@
       (ngModelChange)='onAmountInputChange()'
       placeholder='Montant dépense'/>
 
-      <label>Devise</label>
+      <label>{{'expenseCurrency' | translate}}</label>
       <select
       name="expenseOriginalAmountCurrency"
       type="select"
@@ -64,7 +64,7 @@
   </div>
 
   <!--Show converted amount in euros-->
-  <label >Montant en Euros</label>
+  <label >{{'expenseConvertedAmount' | translate}}</label>
   <p class='converted-amount' >
     <span *ngIf='isConversionDone' class='convertedAmount'>{{expenseConvertedAmount}} {{expenseConvertedAmountCurrency}}</span>
     <span *ngIf='isConversionLoading'><app-spinner></app-spinner></span>
@@ -75,5 +75,5 @@
     <app-styled-button *ngIf='showDeleteButton' [roundButton]='false' [buttonSave]='false' [disabled]='false' (click)='handleDelete()'></app-styled-button>
   </div>
     <!--Inform if error-->
-    <div *ngIf='error' class='error'>Erreur lors de l'envoi</div>
+    <div *ngIf='error' class='error'>{{'formError' | translate}}</div>
 </div>

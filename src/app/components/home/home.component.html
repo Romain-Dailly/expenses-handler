@@ -2,7 +2,8 @@
 <app-nav
 (numberPerPageChange)='handleNumberPerPageChange($event)'
 (orderByChange)='handleOrderByChange($event)'
-[hideSortExpensesHeader]='hideSortExpensesHeader'>
+[hideSortExpensesHeader]='hideSortExpensesHeader'
+(changeLanguage)='switchLang($event)'>
 </app-nav>
 
 <!--Spinner on loading-->
@@ -10,10 +11,15 @@
   <app-spinner></app-spinner>
 </div>
 
+<!--Error-->
+<div *ngIf='isError' class='error-container'>
+  <p>{{'error' | translate}}</p>
+</div>
+
 <!--Page content-->
 <app-expenses-list 
 *ngIf='expenseItems && isLoading===false'
 [expenseItems]='expenseItems'
-(passUpdateExpenseListOnListChange)='updateExpenseListOnListChange($event)'>
+(passUpdateExpenseListOnListChange)='updateExpenseListOnListChange()'>
 </app-expenses-list>
 

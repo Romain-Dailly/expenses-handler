@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+
 import { environment } from './../../../environments/environment';
+
 import { trigger, transition, animate, style } from '@angular/animations';
 
 
@@ -20,39 +22,55 @@ import { trigger, transition, animate, style } from '@angular/animations';
   ]
 })
   
+  
 export class NavComponent implements OnInit {
 
+
   // Porperty to toggle sort header
-  showSortExpensesHeader: boolean = false;
+  public showSortExpensesHeader:boolean = false;
 
   // Sort header needs to be closed from outside
-  @Input() hideSortExpensesHeader: boolean;
+  @Input() hideSortExpensesHeader:boolean;
   
   // Events to emit on values change
   @Output() numberPerPageChange = new EventEmitter();
   @Output() orderByChange = new EventEmitter();
 
-  // Inputs values defaults in environmment
-  numberPerPage: number = environment.DEFAULT_NUMBER_EXPENSES_PER_PAGE;
-  orderBy: string = environment.DEFAULT_ORDER_BY;
+  // Event to choose language
+  @Output() changeLanguage = new EventEmitter();
 
+  // Inputs values defaults in environmment
+  numberPerPage:number = environment.DEFAULT_NUMBER_EXPENSES_PER_PAGE;
+  orderBy: string = environment.DEFAULT_ORDER_BY;
+  
+  
   constructor() { }
 
-  toggleSortHeader() {
+
+  toggleSortHeader(): void {
 
     this.showSortExpensesHeader = !this.showSortExpensesHeader;
   }
 
-  onNumberPerPageChange() {
+  onNumberPerPageChange(): void {
 
     this.numberPerPageChange.emit(this.numberPerPage);
     this.showSortExpensesHeader = !this.showSortExpensesHeader;
   }
 
-  onOrderChange() {
+  onOrderChange(): void {
 
     this.orderByChange.emit(this.orderBy);
     this.showSortExpensesHeader = !this.showSortExpensesHeader;
+  }
+
+  switchLangToFr(): void {
+
+    this.changeLanguage.emit('fr');
+  }
+  switchLangToEn(): void {
+    
+    this.changeLanguage.emit('en');
   }
 
   ngOnInit() {

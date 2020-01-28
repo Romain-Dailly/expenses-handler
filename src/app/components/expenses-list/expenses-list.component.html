@@ -10,7 +10,7 @@
     <app-form 
     [itemToBeModified]='undefined' 
     (expensesListModified)='updateExpenseListOnListChange()'
-    (formHasToClose)='handleFormClose($event)'>
+    (formHasToClose)='handleFormClose()'>
     </app-form>
   </div>
 
@@ -23,7 +23,7 @@
       <div
       class='expense-content'
       (click)='toggleDetails(i)'
-      title='Cliquez pour modifier'>
+      title="{{'expenseHoverTitle' | translate}}">
         
         <div class='nature-comment'>
           <div class='nature'>
@@ -36,7 +36,7 @@
 
         <div class='date-amount'>
           <div class='date'>
-            <p>{{item.purchasedOn | date:'d/MM/yyyy'}}</p>
+            <p>{{ item.purchasedOn | localizedDate }}</p>
           </div>
           <div class='converted-amount-currency'>
             <p><span class='amount'>{{item.convertedAmount.amount}}</span> {{item.convertedAmount.currency}}</p>
@@ -52,7 +52,7 @@
         <app-form 
         [itemToBeModified]='shownExpenseItem' 
         (expensesListModified)='updateExpenseListOnListChange()'
-        (formHasToClose)='handleFormClose($event)'>
+        (formHasToClose)='handleFormClose()'>
         </app-form>
       </div>
     </div>

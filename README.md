@@ -26,7 +26,8 @@ For currency conversion to euros API :
 You can set defaults : 
 * the number of expenses per page in `DEFAULT_NUMBER_EXPENSES_PER_PAGE`
 * the offset for request in `DEFAULT_OFFSET`
-* the ranking of the list in `DEFAULT_ORDER_BY`.
+* the ranking of the list in `DEFAULT_ORDER_BY`
+* the default language between French ('fr') and English ('en') in `DEFAULT_LANGUAGE`
 
 ### API calls
 

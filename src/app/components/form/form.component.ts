@@ -1,8 +1,9 @@
-import { ExpenseItemInterface } from './../../interfaces/expense-item.interface';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 import { CurrencyConversionService } from './../../services/currency-conversion.service';
 import { DataService } from './../../services/data.service';
 
+import { ExpenseItemInterface } from './../../interfaces/expense-item.interface';
 
 
 @Component({
@@ -11,68 +12,69 @@ import { DataService } from './../../services/data.service';
   styleUrls: ['./form.component.css']
 })
   
+  
 export class FormComponent implements OnInit {
 
 
-  @Input() itemToBeModified;
+  @Input() itemToBeModified:ExpenseItemInterface;
   // Emit event when expense list has to be updated
   @Output() expensesListModified = new EventEmitter();
   // Emit an event to close the form
   @Output() formHasToClose = new EventEmitter();
   
   // handling form type (creation, modification)
-  private formType: string;
-  formTitle: string;
-  showDeleteButton: boolean;
+  private formType:string;
+  public formTitle:string;
+  public showDeleteButton:boolean;
 
   // Button disabled if form not filled or values of itemToBeModified not modified
-  isButtonDisabled: boolean = true;
+  public isButtonDisabled:boolean = true;
 
   // store the input item to verify itemToBeModified modifications
   itemOnFormOpening:ExpenseItemInterface;
 
 
   // Values for inputs
-  expenseDate :Date;
-  expenseNature :string;
-  expenseComment :string;
-  expenseOriginalAmount :number;
-  expenseOriginalAmountCurrency :string;
-  expenseConvertedAmount :number;
-  expenseConvertedAmountCurrency :string = 'EUR';
+  expenseDate:Date;
+  expenseNature:string;
+  expenseComment:string;
+  expenseOriginalAmount:number;
+  expenseOriginalAmountCurrency:string;
+  expenseConvertedAmount:number;
+  expenseConvertedAmountCurrency:string = 'EUR';
 
   // Coefficient to convert to euros got by fetching conversion Api
-  private coefficientToEuros;
+  private coefficientToEuros:any;
 
   // Handle load times for conversion request
-  isConversionLoading: boolean = false;
-  isConversionDone: boolean = false;
+  isConversionLoading:boolean = false;
+  isConversionDone:boolean = false;
   
   // Handle post, put and delete requests
-  isExpenseSent: boolean = false;
-  isExpenseSending: boolean = false;
+  isExpenseSent:boolean = false;
+  isExpenseSending:boolean = false;
 
   // Handle error
-  error: boolean = false;
+  error:boolean = false;
+
 
   constructor(private dataService: DataService,
               private currencyConversionService: CurrencyConversionService
               ) { }
 
-  
 
-  onInputChange() {
+  onInputChange(): void {
   this.setIsButtonDisabled();
   }
 
   // Handle  amount inputs change, if amount and currency are filled, launch euros conversion
-  onAmountInputChange() {
+  onAmountInputChange(): void {
     if (this.expenseOriginalAmountCurrency && this.expenseOriginalAmount) {
       this.convertToEuros();      
     } this.setIsButtonDisabled();
   }
 
-  setIsButtonDisabled() {
+  setIsButtonDisabled(): void {
 
     // Conditions for creation form to be sendable
     if (this.formType === 'create') {
@@ -98,7 +100,7 @@ export class FormComponent implements OnInit {
   }
 
   // convert if necessary
-  convertToEuros() {
+  convertToEuros(): void {
 
     if (this.expenseOriginalAmountCurrency === 'EUR') { 
       this.expenseConvertedAmount = this.expenseOriginalAmount;
@@ -123,12 +125,13 @@ export class FormComponent implements OnInit {
   }
 
   // Emit event to close form
-  closeForm() {
+  closeForm(): void {
+
     this.formHasToClose.emit();
   }
 
   // Handle form submission
-  onSubmit() {
+  onSubmit(): void {
 
     if (this.formType === 'create') {
       this.postOnExpenseCreation();
@@ -138,9 +141,9 @@ export class FormComponent implements OnInit {
   } 
 
   // Compute inputs in an object to send
-  computeExpenseToSend() {
+  computeExpenseToSend():Object {
 
-   const expenseToSend = {
+    return {
       purchasedOn: this.expenseDate,
       nature: this.expenseNature,
       originalAmount: {
@@ -153,11 +156,10 @@ export class FormComponent implements OnInit {
       },
       comment: this.expenseComment
    };
-    return expenseToSend;
   }
 
   // Post a new expense
-  postOnExpenseCreation() {
+  postOnExpenseCreation():void {
 
     // Get computed expense
     const expenseToSend = this.computeExpenseToSend();
@@ -180,7 +182,7 @@ export class FormComponent implements OnInit {
   }
 
   // Modify an expense
-  putOnExpenseModification() {
+  putOnExpenseModification():void {
     
     // Get computed expense
     const expenseToSend = this.computeExpenseToSend();
@@ -205,7 +207,7 @@ export class FormComponent implements OnInit {
 
 
   // Handle delete expense
-  handleDelete() {
+  handleDelete(): void {
 
     this.dataService.deleteExpenseItem(this.itemToBeModified.id).subscribe(
       data => {
@@ -223,7 +225,7 @@ export class FormComponent implements OnInit {
   }
 
   // Empty form properties
-  resetValuesAfterPost() {
+  resetValuesAfterPost(): void {
 
     this.expenseDate = undefined;
     this.expenseNature = undefined;
@@ -255,11 +257,11 @@ export class FormComponent implements OnInit {
       this.expenseConvertedAmount = this.itemToBeModified.convertedAmount.amount;
       this.expenseComment = this.itemToBeModified.comment;
       this.formType = 'modify';
-      this.formTitle = 'Editer';
+      this.formTitle = 'modificationTitle';
       this.showDeleteButton = true;
     } else {
       this.formType= 'create';
-      this.formTitle = 'Nouvelle';
+      this.formTitle = 'creationTitle';
       this.showDeleteButton = false;
     }
   }

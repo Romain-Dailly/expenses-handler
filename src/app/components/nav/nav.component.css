@@ -8,6 +8,19 @@
   height:8em;
   box-shadow: 0 2px 2px 2px rgba(0,0,0,.12);
 }
+.switch-lang {
+  position:absolute;
+  top:5px;
+  right:5px;
+}
+.flag {
+  cursor:pointer;
+  margin-right:5px;
+}
+.flag:active {
+  position:relative;
+  top:1px;
+}
 h3 {
   color:white;
   padding-left:0.5em;
@@ -29,9 +42,11 @@ h3 {
   cursor:pointer;
 }
 .fa-sliders-h:hover {
+  color:rgb(255, 191, 23);
+}
+.fa-sliders-h:active {
   position:relative;
   top:1px;
-  color:rgb(255, 191, 23);
 }
 .sort-expenses-header {
   z-index:6;

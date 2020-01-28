@@ -1,6 +1,9 @@
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 import { ExpenseItemInterface } from './../../interfaces/expense-item.interface';
-import { Component, OnInit, Input,Output, EventEmitter } from '@angular/core';
+
 import { trigger, transition, animate, style } from '@angular/animations';
+
 
 @Component({
   selector: 'app-expenses-list',
@@ -28,6 +31,7 @@ import { trigger, transition, animate, style } from '@angular/animations';
   ]
 })
   
+  
 export class ExpensesListComponent implements OnInit {
 
 
@@ -36,13 +40,13 @@ export class ExpensesListComponent implements OnInit {
   // Expense list computed in home component
   @Input() expenseItems;
   // The index got in the list on click
-  selectedItem: number;
+  public selectedItem:number;
   // The item at this index
-  shownExpenseItem:ExpenseItemInterface;
+  public shownExpenseItem:ExpenseItemInterface;
 
   // Handle creation or modification form visibility
-  areShownDetails: boolean = false;
-  isCreationFormOpened: boolean = false;
+  public areShownDetails:boolean = false;
+  public isCreationFormOpened:boolean = false;
 
   constructor() { }
 
@@ -50,7 +54,8 @@ export class ExpensesListComponent implements OnInit {
   }
 
   // Toggle modification form and handle opened forms
-  toggleDetails(index) {
+  toggleDetails(index: number): void {
+    
     // Set the selected item to bind it to modification form
     this.shownExpenseItem = this.expenseItems[index];
     // If creation form opened, close it
@@ -68,20 +73,23 @@ export class ExpensesListComponent implements OnInit {
   }
 
   // Event emitted from Form on its closure without change in expense list
-  handleFormClose($event) {
+  handleFormClose(): void {
+    
     this.areShownDetails = false;
     this.isCreationFormOpened = false;
   }
 
   // Event emmitted on form closure with change in expenses list
-  updateExpenseListOnListChange() {
+  updateExpenseListOnListChange(): void {
+    
     this.passUpdateExpenseListOnListChange.emit();
     this.areShownDetails = false;
     this.isCreationFormOpened = false;
   }
   
   // Handle creation button click
-  createNewExpense() {
+  createNewExpense(): void {
+    
     this.isCreationFormOpened = true;
   }
 }
