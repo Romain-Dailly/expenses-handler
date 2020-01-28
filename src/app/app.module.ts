@@ -13,6 +13,7 @@ import { StyledButtonComponent } from './components/styled-button/styled-button.
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 registerLocaleData(localeFr);
 
@@ -23,7 +24,8 @@ registerLocaleData(localeFr);
     ExpensesListComponent,
     FormComponent,
     NavComponent,
-    StyledButtonComponent
+    StyledButtonComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

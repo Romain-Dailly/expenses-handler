@@ -124,7 +124,6 @@ export class FormComponent implements OnInit {
   //
   closeForm() {
     this.formHasToClose.emit();
-    console.log('envoi form');
   }
 
   // Post a new expense
@@ -147,8 +146,6 @@ export class FormComponent implements OnInit {
     this.dataService.postNewExpenseItem(expenseForPost).subscribe(
       data => {
         this.isExpenseSending = true;
-        console.log(data);
-
         if (data) {
           this.expensesListModified.emit();
           this.isExpenseSent = true;
@@ -183,8 +180,6 @@ export class FormComponent implements OnInit {
     this.dataService.putExpenseItem(this.itemToBeModified.id, expenseForPut).subscribe(
       data => {
         this.isExpenseSending = true;
-        console.log(data);
-
         if (data) {
           this.expensesListModified.emit();
           this.isExpenseSent = true;
@@ -210,7 +205,6 @@ export class FormComponent implements OnInit {
 
   // Handle delete expense
   handleDelete() {
-    console.log(this.itemToBeModified.id);
     this.dataService.deleteExpenseItem(this.itemToBeModified.id).subscribe(
       data => {
         this.isExpenseSending = true;
@@ -252,7 +246,7 @@ export class FormComponent implements OnInit {
     // If an item is in the input, set inputs values and form typestyle='color:white; font-size:36px; z-index:10;padding-top:0.2em;'
     if (this.itemToBeModified) {
 
-      this.itemToBeModified.originalAmount.currency === 'EUR' ? this.isConversionDone = false : this.isConversionDone = true;
+      this.isConversionDone = true;
       this.expenseDate = this.itemToBeModified.purchasedOn;
       this.expenseNature = this.itemToBeModified.nature;
       this.expenseOriginalAmountCurrency = this.itemToBeModified.originalAmount.currency;
@@ -260,11 +254,11 @@ export class FormComponent implements OnInit {
       this.expenseConvertedAmount = this.itemToBeModified.convertedAmount.amount;
       this.expenseComment = this.itemToBeModified.comment;
       this.formType = 'modify';
-      this.formTitle = 'Modifier';
+      this.formTitle = 'Editer';
       this.showDeleteButton = true;
     } else {
       this.formType= 'create';
-      this.formTitle = 'Créer';
+      this.formTitle = 'Nouvelle';
       this.showDeleteButton = false;
     }
   }

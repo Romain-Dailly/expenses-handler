@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { environment } from './../../../environments/environment';
 import { trigger, transition, animate, style } from '@angular/animations';
 
 
@@ -23,15 +24,17 @@ export class NavComponent implements OnInit {
     
   showSortHeader: boolean = false;
 
+  @Input() hideSortHeader: boolean;
   @Output() numberPerPageChange = new EventEmitter();
   @Output() orderByChange = new EventEmitter();
 
-  numberPerPage: number = 50;
+  numberPerPage: number = environment.DEFAULT_NUMBER_EXPENSES_PER_PAGE;
   orderBy: string = 'desc-date';
 
   constructor() { }
 
   toggleSortHeader() {
+    console.log(this.showSortHeader);
     this.showSortHeader = !this.showSortHeader;
   }
 
@@ -41,12 +44,15 @@ export class NavComponent implements OnInit {
   }
 
   onOrderChange() {
-    console.log(this.orderBy);
     this.orderByChange.emit(this.orderBy);
     this.showSortHeader = !this.showSortHeader;
   }
 
   ngOnInit() {
+  }
+  
+  ngOnChanges() {
+      this.hideSortHeader === true ? this.showSortHeader = false : this.showSortHeader = this.showSortHeader;  
   }
 
 }

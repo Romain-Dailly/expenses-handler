@@ -1,7 +1,7 @@
 
 <div class='form'>
   <div class='close'><i class='fas fa-times'(click)='closeForm()'></i></div>
-  <h3>{{formTitle}}</h3>
+  <h3>{{formTitle}}<span class='long-title'> note</span></h3>
   <div class='form-content'>
     <div class='left-part'>
       <label>Nature</label>
@@ -13,7 +13,7 @@
       <label>Date</label>
       <input class='date' name="expenseDate" type="date"[(ngModel)]="expenseDate" (ngModelChange)='onInputChange()'/>
       <label>Montant Initial</label>
-      <input class='number-input' name="expenseOriginalAmount" type="number" [(ngModel)]="expenseOriginalAmount"(ngModelChange)='onAmountInputChange()' placeholder='Montant dans la devise de la dépense'/>
+      <input class='number-input' name="expenseOriginalAmount" type="number" [(ngModel)]="expenseOriginalAmount"(ngModelChange)='onAmountInputChange()' placeholder='Montant dépense'/>
       <label>Devise</label>
       <select name="expenseOriginalAmountCurrency" type="select" [(ngModel)]="expenseOriginalAmountCurrency" (ngModelChange)='onAmountInputChange()' placeholder='EUR'>
         <option value='EUR'>EUR</option>

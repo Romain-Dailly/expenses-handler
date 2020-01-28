@@ -4,7 +4,7 @@
   overflow-y: scroll;
 }
 .creation-form {
-  z-index:5;
+  z-index:8;
   position:fixed;
   top:8em;
   align-content: center;
@@ -65,7 +65,7 @@
   font-weight: 600;
 }
 .details {
-  z-index:5;
+  z-index:8;
   position:fixed;
   top:8em;
   align-content: center;
@@ -79,9 +79,7 @@
 }
 
 
-
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .details {
     height:83vh;
   }

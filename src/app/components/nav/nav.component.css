@@ -13,6 +13,7 @@ h3 {
   padding-left:0.5em;
   font-size:26px;
   font-stretch: semi-expanded;
+  margin-bottom:16px;
 }
 .sort-header {
   display:flex;
@@ -25,6 +26,7 @@ h3 {
   color:white;
   font-size:30px;
   margin-right:1em;
+  cursor:pointer;
 }
 .fa-sliders-h:hover {
   position:relative;
@@ -32,7 +34,7 @@ h3 {
   color:rgb(255, 191, 23);
 }
 .sort-expenses-header {
-  z-index:8;
+  z-index:6;
   position:fixed;
   background-color:rgb(117, 193, 148);
   top:8em;
@@ -67,5 +69,21 @@ label {
   width:30%;
   margin:0;
   padding-top:0.5em;
+}
+select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius:5px 5px 5px 5px;
+  color: RGB(70,70,70);
+  font-weight:600;
+  background-color:RGB(225,225,225);
+  font-family: 'Roboto';
+  border: none;
+  height:2em;
+  margin-bottom:1em;
+  text-align:center;
+}
+select::-ms-expand {
+  border-radius:10px;
 }
 

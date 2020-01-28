@@ -4,11 +4,11 @@
     <i class="fas fa-sliders-h" (click)='toggleSortHeader()'></i>
   </div>
 </div>
-<div *ngIf='showSortHeader' class='sort-expenses-header'[@slideInOut]>
+<div *ngIf='showSortHeader' class='sort-expenses-header'[@slideInOut] (clickOutside)="toggleSortHeader()">
   <p>Classer</p>
   <div class='settings'>
     <div class='expenses-per-page'>
-      <label>Page</label>
+      <label>Par page</label>
       <select [(ngModel)]="numberPerPage" (ngModelChange)='onNumberPerPageChange()'>
         <option value='5'>5 notes</option>
         <option value='10'>10 notes</option>

@@ -1,11 +1,11 @@
 .form {
-  z-index:5; 
+  z-index:8; 
   width:100%;
   height:100%;
   align-content: center;
   text-align:center;
   overflow: hidden;
-  background-color:rgb(132, 211, 163);
+  background-color:rgb(117, 193, 148);
   margin-bottom:2em;
   cursor:default;
 }
@@ -135,15 +135,22 @@ input[type=number] {
   width:15em;
   -moz-appearance:textfield;
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width:800px) {
+  h3 {
+    margin-bottom:2em;
+  }
+  .long-title {
+display:none;
+  }
+  .converted-amount {
+    margin-bottom:2em;
+  }
   textarea {
     width: 10em;
     height: 6em;
-    padding-left:1em;
   }
   input[type=text] {
     width:10em;
-    padding-left:1em;
   }
 
   input[type=number] {
@@ -155,5 +162,10 @@ input[type=number] {
   }
   label {
     font-size:12px;
+  }
+}
+@media screen and (max-height:667px) {
+  h3 {
+    margin-bottom:0.5em;
   }
 }

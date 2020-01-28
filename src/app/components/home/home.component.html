@@ -1,4 +1,4 @@
-<app-nav (numberPerPageChange)='handleNumberPerPageChange($event)' (orderByChange)='handleOrderByChange($event)'></app-nav>
-<p *ngIf='isLoading'>Loading</p>
+<app-nav (numberPerPageChange)='handleNumberPerPageChange($event)' (orderByChange)='handleOrderByChange($event)' [hideSortHeader]='hideSortHeader'></app-nav>
+<div *ngIf='isLoading' class='spinner-container'><app-spinner></app-spinner></div>
 <app-expenses-list  *ngIf='expenseItems && isLoading===false' [expenseItems]='expenseItems' (passUpdateExpenseListOnListChange)='updateExpenseListOnListChange($event)'></app-expenses-list>
 

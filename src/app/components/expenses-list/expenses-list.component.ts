@@ -68,7 +68,6 @@ export class ExpensesListComponent implements OnInit {
 
   // Event emitted to close Form 
   handleFormClose($event) {
-    console.log('recu dans list');
     this.areShownDetails = false;
     this.isCreationFormOpened = false;
   }
