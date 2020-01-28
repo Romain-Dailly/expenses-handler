@@ -19,7 +19,7 @@ Front-end Single page application to display and handle expenses, for employees 
 Set values of your TOKEN and APIKEY in `environment.example.ts` and then change the file name to `environment.ts` for developpment purpose.
 For production build, copy the content of the file in `environment.prod.ts`.
 For currency conversion to euros API, create an account on `https://free.currconv.com/`, and add your api key to the `environment.ts` file in `CURRENCYCONVERTER_APIKEY` property.
-You can set the number of expenses per page in `DEFAULT_NUMBER_EXPENSES_PER_PAGE` and the offset for request in `DEFAULT_OFFSET`.
+You can set defaults : the number of expenses per page in `DEFAULT_NUMBER_EXPENSES_PER_PAGE`, the offset for request in `DEFAULT_OFFSET` and the ranking of the list in `DEFAULT_ORDER_BY`.
 
 ### API calls
 
