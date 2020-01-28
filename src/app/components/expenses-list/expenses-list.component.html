@@ -2,20 +2,29 @@
   
   <!--Div to show creation form-->
   <div 
-    class='creation-form' 
-    *ngIf='isCreationFormOpened' 
-    [@slideInOut]>
+  class='creation-form' 
+  *ngIf='isCreationFormOpened' 
+  [@slideInOut]>
+
+    <!--Creation form-->
     <app-form 
-      [itemToBeModified]='undefined' 
-      (expensesListModified)='updateExpenseListOnListChange()'
-      (formHasToClose)='handleFormClose($event)'>
+    [itemToBeModified]='undefined' 
+    (expensesListModified)='updateExpenseListOnListChange()'
+    (formHasToClose)='handleFormClose($event)'>
     </app-form>
   </div>
 
   <!--Expenses list-->
   <div class='expenses-list'>
+
+    <!--Each expense-->
     <div class='expense' *ngFor='let item of expenseItems; let i = index'>
-      <div class='expense-content' (click)='toggleDetails(i)' title='Cliquez pour modifier'>
+      
+      <div
+      class='expense-content'
+      (click)='toggleDetails(i)'
+      title='Cliquez pour modifier'>
+        
         <div class='nature-comment'>
           <div class='nature'>
             <p>{{item.nature}}</p>
@@ -24,6 +33,7 @@
             <p>{{item.comment}}</p>
           </div>
         </div>
+
         <div class='date-amount'>
           <div class='date'>
             <p>{{item.purchasedOn | date:'d/MM/yyyy'}}</p>
@@ -40,9 +50,9 @@
         *ngIf='selectedItem === i && areShownDetails' 
         [@slideInOut]>
         <app-form 
-          [itemToBeModified]='shownExpenseItem' 
-          (expensesListModified)='updateExpenseListOnListChange()'
-          (formHasToClose)='handleFormClose($event)'>
+        [itemToBeModified]='shownExpenseItem' 
+        (expensesListModified)='updateExpenseListOnListChange()'
+        (formHasToClose)='handleFormClose($event)'>
         </app-form>
       </div>
     </div>

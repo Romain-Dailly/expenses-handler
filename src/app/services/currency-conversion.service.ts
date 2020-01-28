@@ -18,7 +18,9 @@ export class CurrencyConversionService {
 
   constructor(private http:HttpClient) { }
 
-  getCoefficientToEuros (currency): Observable<Object> {
+  // Call to currency converter api to get the selected currency conversion coefficient
+  getCoefficientToEuros(currency): Observable<Object> {
+    
     this.currencyLayerFinalUrl = `${environment.CURRENCYCONVERTER_URL}?q=${currency}_EUR&compact=ultra&apiKey=${environment.CURRENCYCONVERTER_APIKEY}`;
     return this.http.get(this.currencyLayerFinalUrl, this.httpOptions);
   }

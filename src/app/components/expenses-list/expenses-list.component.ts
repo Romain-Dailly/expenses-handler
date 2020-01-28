@@ -27,47 +27,55 @@ import { trigger, transition, animate, style } from '@angular/animations';
     ]),
   ]
 })
+  
 export class ExpensesListComponent implements OnInit {
 
+
+  // Send event to home component when expense list has to be modified
   @Output() passUpdateExpenseListOnListChange = new EventEmitter();
+  // Expense list computed in home component
   @Input() expenseItems;
+  // The index got in the list on click
+  selectedItem: number;
+  // The item at this index
   shownExpenseItem:ExpenseItemInterface;
 
-  selectedItem: number;
+  // Handle creation or modification form visibility
   areShownDetails: boolean = false;
   isCreationFormOpened: boolean = false;
-
-  creationButtonText: string = '+';
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  // Toggle details in view and bind it to the form in shownExpenseItem
+  // Toggle modification form and handle opened forms
   toggleDetails(index) {
-
+    // Set the selected item to bind it to modification form
     this.shownExpenseItem = this.expenseItems[index];
+    // If creation form opened, close it
     if (this.isCreationFormOpened) {
       this.areShownDetails = false;
       this.isCreationFormOpened = false;
+      // if modification form opened, close it
     } else if (this.selectedItem !== index && this.areShownDetails === true) {
       this.areShownDetails = false;
+      // else open modification form
     } else {
       this.selectedItem = index;
       this.areShownDetails = !this.areShownDetails;
     }
   }
 
-  // Event emitted on form
-  updateExpenseListOnListChange() {
-    this.passUpdateExpenseListOnListChange.emit();
+  // Event emitted from Form on its closure without change in expense list
+  handleFormClose($event) {
     this.areShownDetails = false;
     this.isCreationFormOpened = false;
   }
 
-  // Event emitted to close Form 
-  handleFormClose($event) {
+  // Event emmitted on form closure with change in expenses list
+  updateExpenseListOnListChange() {
+    this.passUpdateExpenseListOnListChange.emit();
     this.areShownDetails = false;
     this.isCreationFormOpened = false;
   }
@@ -76,8 +84,4 @@ export class ExpensesListComponent implements OnInit {
   createNewExpense() {
     this.isCreationFormOpened = true;
   }
-  // ngOnChanges() {
-  //   console.log(this.expenseItems);
-  // }
-
 }

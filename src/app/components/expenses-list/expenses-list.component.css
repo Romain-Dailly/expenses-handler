@@ -77,8 +77,6 @@
   bottom:2em;
   right:3em;
 }
-
-
 @media screen and (max-width: 800px) {
   .details {
     height:83vh;

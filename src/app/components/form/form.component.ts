@@ -11,19 +11,19 @@ import { DataService } from './../../services/data.service';
   styleUrls: ['./form.component.css']
 })
   
-  
 export class FormComponent implements OnInit {
 
 
   @Input() itemToBeModified;
+  // Emit event when expense list has to be updated
   @Output() expensesListModified = new EventEmitter();
+  // Emit an event to close the form
   @Output() formHasToClose = new EventEmitter();
   
   // handling form type (creation, modification)
-  formType: string;
+  private formType: string;
   formTitle: string;
   showDeleteButton: boolean;
-  deleteButtonText: string = 'Supprimer';
 
   // Button disabled if form not filled or values of itemToBeModified not modified
   isButtonDisabled: boolean = true;
@@ -74,6 +74,7 @@ export class FormComponent implements OnInit {
 
   setIsButtonDisabled() {
 
+    // Conditions for creation form to be sendable
     if (this.formType === 'create') {
 
       if (this.expenseDate && this.expenseNature && this.expenseComment && this.expenseOriginalAmount && this.expenseOriginalAmountCurrency && this.isConversionDone) {
@@ -81,7 +82,7 @@ export class FormComponent implements OnInit {
       } else {
         this.isButtonDisabled = true;
       }
-
+    // Conditions for modification form to be sendable
     } else if (this.formType === 'modify') { 
 
       if (this.expenseDate !== this.itemOnFormOpening.purchasedOn ||
@@ -121,15 +122,25 @@ export class FormComponent implements OnInit {
     }
   }
 
-  //
+  // Emit event to close form
   closeForm() {
     this.formHasToClose.emit();
   }
 
-  // Post a new expense
-  postOnExpenseCreation() {
+  // Handle form submission
+  onSubmit() {
 
-    const expenseForPost = {
+    if (this.formType === 'create') {
+      this.postOnExpenseCreation();
+    } else if (this.formType === 'modify') {
+      this.putOnExpenseModification();
+    }
+  } 
+
+  // Compute inputs in an object to send
+  computeExpenseToSend() {
+
+   const expenseToSend = {
       purchasedOn: this.expenseDate,
       nature: this.expenseNature,
       originalAmount: {
@@ -141,9 +152,17 @@ export class FormComponent implements OnInit {
         currency: this.expenseConvertedAmountCurrency
       },
       comment: this.expenseComment
-    };
+   };
+    return expenseToSend;
+  }
 
-    this.dataService.postNewExpenseItem(expenseForPost).subscribe(
+  // Post a new expense
+  postOnExpenseCreation() {
+
+    // Get computed expense
+    const expenseToSend = this.computeExpenseToSend();
+    // Send it
+    this.dataService.postNewExpenseItem(expenseToSend).subscribe(
       data => {
         this.isExpenseSending = true;
         if (data) {
@@ -163,21 +182,10 @@ export class FormComponent implements OnInit {
   // Modify an expense
   putOnExpenseModification() {
     
-    const expenseForPut = {
-      purchasedOn: this.expenseDate,
-      nature: this.expenseNature,
-      originalAmount: {
-        amount: this.expenseOriginalAmount,
-        currency: this.expenseOriginalAmountCurrency
-      },
-      convertedAmount: {
-        amount: this.expenseConvertedAmount,
-        currency: this.expenseConvertedAmountCurrency
-      },
-      comment: this.expenseComment
-    };
-
-    this.dataService.putExpenseItem(this.itemToBeModified.id, expenseForPut).subscribe(
+    // Get computed expense
+    const expenseToSend = this.computeExpenseToSend();
+    // Send it
+    this.dataService.putExpenseItem(this.itemToBeModified.id, expenseToSend).subscribe(
       data => {
         this.isExpenseSending = true;
         if (data) {
@@ -194,17 +202,11 @@ export class FormComponent implements OnInit {
     )
   }
 
-  // Handle form submission
-  onSubmit() {
-    if (this.formType === 'create') {
-      this.postOnExpenseCreation();
-    } else if (this.formType === 'modify') {
-      this.putOnExpenseModification();
-    }
-  }
+
 
   // Handle delete expense
   handleDelete() {
+
     this.dataService.deleteExpenseItem(this.itemToBeModified.id).subscribe(
       data => {
         this.isExpenseSending = true;
@@ -234,7 +236,6 @@ export class FormComponent implements OnInit {
     this.error = false;
   }
 
-
   ngOnInit() {
   }
 
@@ -243,7 +244,7 @@ export class FormComponent implements OnInit {
     // Store new changes
     this.itemOnFormOpening = changes.itemToBeModified.currentValue;
 
-    // If an item is in the input, set inputs values and form typestyle='color:white; font-size:36px; z-index:10;padding-top:0.2em;'
+    // If an item is in the input, set inputs values and form type
     if (this.itemToBeModified) {
 
       this.isConversionDone = true;

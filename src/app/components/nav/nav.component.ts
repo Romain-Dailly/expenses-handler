@@ -19,40 +19,48 @@ import { trigger, transition, animate, style } from '@angular/animations';
     ])
   ]
 })
+  
 export class NavComponent implements OnInit {
 
-    
-  showSortHeader: boolean = false;
+  // Porperty to toggle sort header
+  showSortExpensesHeader: boolean = false;
 
-  @Input() hideSortHeader: boolean;
+  // Sort header needs to be closed from outside
+  @Input() hideSortExpensesHeader: boolean;
+  
+  // Events to emit on values change
   @Output() numberPerPageChange = new EventEmitter();
   @Output() orderByChange = new EventEmitter();
 
+  // Inputs values defaults in environmment
   numberPerPage: number = environment.DEFAULT_NUMBER_EXPENSES_PER_PAGE;
-  orderBy: string = 'desc-date';
+  orderBy: string = environment.DEFAULT_ORDER_BY;
 
   constructor() { }
 
   toggleSortHeader() {
-    console.log(this.showSortHeader);
-    this.showSortHeader = !this.showSortHeader;
+
+    this.showSortExpensesHeader = !this.showSortExpensesHeader;
   }
 
   onNumberPerPageChange() {
+
     this.numberPerPageChange.emit(this.numberPerPage);
-    this.showSortHeader = !this.showSortHeader;
+    this.showSortExpensesHeader = !this.showSortExpensesHeader;
   }
 
   onOrderChange() {
+
     this.orderByChange.emit(this.orderBy);
-    this.showSortHeader = !this.showSortHeader;
+    this.showSortExpensesHeader = !this.showSortExpensesHeader;
   }
 
   ngOnInit() {
   }
   
   ngOnChanges() {
-      this.hideSortHeader === true ? this.showSortHeader = false : this.showSortHeader = this.showSortHeader;  
+
+      this.hideSortExpensesHeader === true ? this.showSortExpensesHeader = false : this.showSortExpensesHeader = this.showSortExpensesHeader;  
   }
 
 }

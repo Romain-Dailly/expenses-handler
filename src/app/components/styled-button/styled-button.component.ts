@@ -7,8 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StyledButtonComponent implements OnInit {
 
+  // Button content is save?
   @Input() buttonSave: boolean;
+  // Button is disabled ?
   @Input() disabled: boolean;
+  // Button is round ?
   @Input() roundButton: boolean;
 
 

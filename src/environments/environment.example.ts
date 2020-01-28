@@ -5,5 +5,6 @@ export const environment = {
   CURRENCYCONVERTER_URL: 'https://free.currconv.com/api/v7/convert',
   CURRENCYCONVERTER_APIKEY : 'your currencylayer api key here',
   DEFAULT_NUMBER_EXPENSES_PER_PAGE: 50,
-  DEFAULT_OFFSET:0
+  DEFAULT_OFFSET:0,
+  DEFAULT_ORDER_BY:'desc-date'
 };

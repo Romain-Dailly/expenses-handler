@@ -9,9 +9,13 @@ import { Observable, of } from 'rxjs';
 })
 export class DataService {
 
+  // Api key
   private token: string = environment.TOKEN;
+  // Api base url
   private api_url: string = environment.API_URL;
+  // Api url with parameters
   private get_api_url: string;
+  // Api url with id in parameters
   private put_delete_api_url: string;
 
  httpOptions = {
@@ -32,14 +36,14 @@ export class DataService {
   postNewExpenseItem(body): Observable<Object> {
     return this.http.post(this.api_url, body, this.httpOptions)
   }
-
-  deleteExpenseItem(id): Observable<Object> {
-    this.put_delete_api_url = `${this.api_url}/${id}`;
-    return this.http.delete(this.put_delete_api_url, this.httpOptions);
-  }
   
   putExpenseItem(id, body): Observable<Object> {
     this.put_delete_api_url = `${this.api_url}/${id}`;
     return this.http.put(this.put_delete_api_url, body, this.httpOptions)
+  }
+
+  deleteExpenseItem(id): Observable<Object> {
+    this.put_delete_api_url = `${this.api_url}/${id}`;
+    return this.http.delete(this.put_delete_api_url, this.httpOptions);
   }
 }

@@ -1,6 +1,15 @@
+<!--Flat button-->
 <div *ngIf='!roundButton' class='button'>
+  <!--Save content-->
   <i *ngIf='buttonSave' class="fas fa-save"></i>
+  <!--Delete content-->
   <i *ngIf='!buttonSave' class="fas fa-trash"></i>
 </div>
-<div *ngIf='roundButton' class='roundButton'><i class="fas fa-plus"></i></div>
+
+<!--Round button-->
+<div *ngIf='roundButton' class='roundButton'>
+  <i class="fas fa-plus"></i>
+</div>
+
+<!--Overlay if flat button is disabled-->
 <div *ngIf='disabled' class='disabled-overlay'></div>

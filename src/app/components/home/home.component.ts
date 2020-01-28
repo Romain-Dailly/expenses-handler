@@ -10,13 +10,13 @@ import { environment } from './../../../environments/environment';
 })
 export class HomeComponent implements OnInit {
 
-  // provisory response from api
+  // Provisory response from api to be computed 
   private expenseItemsResponse;
 
   // Items got from provisory response
   public expenseItems: ExpenseItemInterface[];
 
-  // Filters for data
+  // Filters for data requests, defaults in environment file
   filters = {
     numberPerPage: environment.DEFAULT_NUMBER_EXPENSES_PER_PAGE,
     offset: environment.DEFAULT_OFFSET
@@ -25,19 +25,19 @@ export class HomeComponent implements OnInit {
   // Subscription to the data service
   private subscriptionToData;
 
-  // handle display of toggled sort-header and loading on requests
-  hideSortHeader: boolean = false;
+  // Handle display of toggled sort-expenses-header and loading on requests
+  hideSortExpensesHeader: boolean = false;
   isLoading: boolean = true;
   
   constructor(private dataService:DataService) { }
 
-  // Handle emitters from nav sort-header
+  // Handle emitters from nav sort-expenses-header and recall api
   handleNumberPerPageChange($event) {
     this.filters.numberPerPage = $event;
     this.getExpensesFromApi(this.filters);
   }
   handleOrderByChange($event) {
-    // Order depending of applyied filter
+    // Order list depending on applyied filter
     if ($event === 'desc-date') {
       this.expenseItems = this.expenseItems.sort(
         (a, b) => Number(new Date(a.purchasedOn)) - Number(new Date((b.purchasedOn)))).reverse();
@@ -56,12 +56,12 @@ export class HomeComponent implements OnInit {
   // Api call through data service
   getExpensesFromApi(filters) {
 
-    // reset values before calling api
+    // Reset values before calling api
     this.expenseItemsResponse = undefined;
     this.expenseItems = undefined;
     this.subscriptionToData !== undefined && this.subscriptionToData.unsubscribe();
     this.isLoading = true;
-    // Send filters to the service for request url
+    // Send filters to the service to set request url
     this.subscriptionToData = this.dataService.getExpenseItems(filters).subscribe(
       data => {
         this.expenseItemsResponse = data;
@@ -80,18 +80,20 @@ export class HomeComponent implements OnInit {
 
   // Event emmitted from form to update list
   updateExpenseListOnListChange($event) {
-    this.hideSortHeader = true;
+
+    this.hideSortExpensesHeader = true;
     this.getExpensesFromApi(this.filters);
-    
     // Wait to set hideSortHeader value to false to make the change work next time
-    setTimeout(() => { this.hideSortHeader = false }, 2000);
+    setTimeout(() => { this.hideSortExpensesHeader = false }, 2000);
   }
 
   ngOnInit() {
+
       this.getExpensesFromApi(this.filters);
   }
 
   ngOnDestroy() {
+    
     this.subscriptionToData !== undefined && this.subscriptionToData.unsubscribe();
   }
 
