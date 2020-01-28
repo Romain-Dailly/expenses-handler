@@ -6,6 +6,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Front-end Single page application to display and handle expenses, for employees to get paid back.
 
+## Possible upgrades
+
+The app was made without external dependencies (except ngx-translate) for more efficiency.
+
+Upgrades : 
+* Inputs could be nicer, particularly the date one which could be modified to display date in the language.
+* The default currency could be modified on language change for conversion.
+* Button component could be optimized to really be reusable.
+* Global design should be improved, polices should be well chosen.
+* The app was developped mainly for mobile devices, could be upgraded on media queries handling.
+
 ## Installation / Getting started
 
 * [Download the installer](https://nodejs.org/) for Node.js.

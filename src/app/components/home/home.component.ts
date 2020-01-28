@@ -94,6 +94,7 @@ export class HomeComponent implements OnInit {
       },
       error => {
         this.isError = true;
+        this.isLoading = false;
         console.log(error);
       }
     ); 

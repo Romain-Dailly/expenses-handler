@@ -263,6 +263,7 @@ export class FormComponent implements OnInit {
       this.formType= 'create';
       this.formTitle = 'creationTitle';
       this.showDeleteButton = false;
+      this.expenseDate = new Date;
     }
   }
 

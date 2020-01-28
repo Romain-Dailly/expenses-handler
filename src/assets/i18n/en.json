@@ -18,7 +18,7 @@
   "sortheaderTitle":"Rank",
   "numberPerPageLabel":"Per page",
   "numberPerPageExpense":"reports",
-  "orderByLabel":"Sort by",
+  "orderByLabel":"First show",
   "orderByDateRecent":"Recent",
   "orderByDateOld":"Older",
   "orderByAmount":"Amount"
