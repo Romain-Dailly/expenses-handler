@@ -46,7 +46,6 @@ export class NavComponent implements OnInit {
   
   constructor() { }
 
-
   toggleSortHeader(): void {
 
     this.showSortExpensesHeader = !this.showSortExpensesHeader;

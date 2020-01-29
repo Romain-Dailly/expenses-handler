@@ -8,7 +8,10 @@
 
 <!--Spinner on loading-->
 <div *ngIf='isLoading' class='spinner-container'>
-  <app-spinner></app-spinner>
+  <app-spinner
+  [height]='spinnerHeight'
+  [width]='spinnerWidth'>
+  </app-spinner>
 </div>
 
 <!--Error-->

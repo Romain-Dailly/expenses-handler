@@ -48,14 +48,18 @@ export class FormComponent implements OnInit {
 
   // Handle load times for conversion request
   isConversionLoading:boolean = false;
-  isConversionDone:boolean = false;
+  isConversionDone: boolean = false;
+  spinnerWidth: string = '20px';
+  spinnerHeight: string = '20px';
+  spinnerMargin: string ='2px auto'
   
   // Handle post, put and delete requests
   isExpenseSent:boolean = false;
   isExpenseSending:boolean = false;
 
   // Handle error
-  error:boolean = false;
+  error: boolean = false;
+  isConversionError: boolean = false;
 
 
   constructor(private dataService: DataService,
@@ -102,6 +106,7 @@ export class FormComponent implements OnInit {
   // convert if necessary
   convertToEuros(): void {
 
+    this.isConversionError = false;
     if (this.expenseOriginalAmountCurrency === 'EUR') { 
       this.expenseConvertedAmount = this.expenseOriginalAmount;
       this.isConversionLoading = false;
@@ -118,6 +123,9 @@ export class FormComponent implements OnInit {
           this.setIsButtonDisabled();
         },
         error => {
+          this.isConversionLoading = false;
+          this.isConversionDone = false;
+          this.isConversionError = true;
           console.log(error);
         }
       );
@@ -203,8 +211,6 @@ export class FormComponent implements OnInit {
       }
     )
   }
-
-
 
   // Handle delete expense
   handleDelete(): void {

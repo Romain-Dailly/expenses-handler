@@ -38,7 +38,10 @@ export class HomeComponent implements OnInit {
   // Handle display of toggled sort-expenses-header
   hideSortExpensesHeader: boolean = false;
   //handle loading on requests and errors
-  isLoading:boolean = true;
+  isLoading: boolean = true;
+  spinnerWidth: string = '60px';
+  spinnerHeight: string = '60px';
+  spinnerMargin:string = '100px auto'
   isError:boolean = false;
 
 
@@ -56,18 +59,24 @@ export class HomeComponent implements OnInit {
     this.getExpensesFromApi(this.filters);
   }
 
+  // Event emitted by nav on orderBy change 
   handleOrderByChange($event:string):void {
     // Order list depending on applyied filter
-    if ($event === 'desc-date') {
+    this.applyOrderBy($event);
+  }
+
+  // Sort expenses using orderBy $event or default
+  applyOrderBy(order:string):void {
+    if (order === 'desc-date') {
       this.expenseItems = this.expenseItems.sort(
         (a, b) => Number(new Date(a.purchasedOn)) - Number(new Date((b.purchasedOn)))).reverse();
-    } else if ($event === 'desc-amount') {
+    } else if (order === 'desc-amount') {
       this.expenseItems = this.expenseItems.sort(
         (a, b) => a.convertedAmount.amount - b.convertedAmount.amount).reverse();
-    } else if ($event === 'asc-date') {
+    } else if (order === 'asc-date') {
       this.expenseItems = this.expenseItems.sort(
         (a, b) => Number(new Date(a.purchasedOn)) - Number(new Date((b.purchasedOn))));
-    } else if ($event === 'asc-amount') {
+    } else if (order === 'asc-amount') {
       this.expenseItems = this.expenseItems.sort(
         (a, b) => a.convertedAmount.amount - b.convertedAmount.amount);
     } 
@@ -87,9 +96,9 @@ export class HomeComponent implements OnInit {
       data => {
         this.expenseItemsResponse = data;
         
-      // Set expenseItems and orderBy filters
-      this.expenseItems = this.expenseItemsResponse.items.sort(
-        (a, b) => Number(new Date(a.purchasedOn)) - Number(new Date((b.purchasedOn)))).reverse();
+        // Set expenseItems and orderBy filters
+        this.expenseItems = this.expenseItemsResponse.items;
+        this.applyOrderBy(environment.DEFAULT_ORDER_BY);
         this.isLoading = false;
       },
       error => {
@@ -100,7 +109,7 @@ export class HomeComponent implements OnInit {
     ); 
   }
 
-  // Event emmitted from form to update list
+  // Event emitted from form to update list
   updateExpenseListOnListChange():void {
 
     this.hideSortExpensesHeader = true;

@@ -1,7 +1,8 @@
 {
 
   "title":"Mes notes de frais",
-  "error":"oups, une erreur est survenue, rafraichissez la page ...",
+  "error":"Oups, une erreur est survenue, rafraichissez la page ...",
+  "conversionError":"Réessayez ...",
   "expenseNature":"Nature du frais",
   "expenseComment":"Commentaire",
   "expenseDate":"Date",

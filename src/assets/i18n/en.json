@@ -2,6 +2,7 @@
 
   "title":"My expenses report",
   "error":"oups, an error occured, refresh page ...",
+  "conversionError":"Try again ...",
   "expenseNature":"Expense nature",
   "expenseComment":"Comment",
   "expenseDate":"Date",

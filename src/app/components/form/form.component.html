@@ -66,13 +66,34 @@
   <!--Show converted amount in euros-->
   <label >{{'expenseConvertedAmount' | translate}}</label>
   <p class='converted-amount' >
-    <span *ngIf='isConversionDone' class='convertedAmount'>{{expenseConvertedAmount}} {{expenseConvertedAmountCurrency}}</span>
-    <span *ngIf='isConversionLoading'><app-spinner></app-spinner></span>
+    <span
+    *ngIf='isConversionDone'
+    class='convertedAmount'>
+    {{expenseConvertedAmount}} {{expenseConvertedAmountCurrency}}
+    </span>
+    <app-spinner
+    *ngIf='isConversionLoading'
+    [height]='spinnerHeight'
+    [width]='spinnerWidth'
+    [margin]='spinnerMargin'>
+    </app-spinner>
+    <span *ngIf='isConversionError'>{{'conversionError' | translate}}</span>
   </p>
 
   <div class ='buttons'>
-    <app-styled-button [roundButton]='false' [buttonSave]='true' [disabled]='isButtonDisabled' (click)='onSubmit()'></app-styled-button>
-    <app-styled-button *ngIf='showDeleteButton' [roundButton]='false' [buttonSave]='false' [disabled]='false' (click)='handleDelete()'></app-styled-button>
+    <app-styled-button
+    [roundButton]='false'
+    [buttonSave]='true'
+    [disabled]='isButtonDisabled'
+    (click)='onSubmit()'>
+    </app-styled-button>
+    <app-styled-button
+    *ngIf='showDeleteButton'
+    [roundButton]='false'
+    [buttonSave]='false'
+    [disabled]='false'
+    (click)='handleDelete()'>
+    </app-styled-button>
   </div>
     <!--Inform if error-->
     <div *ngIf='error' class='error'>{{'formError' | translate}}</div>
