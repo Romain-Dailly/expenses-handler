@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   isLoading: boolean = true;
   spinnerWidth: string = '60px';
   spinnerHeight: string = '60px';
-  spinnerMargin:string = '100px auto'
+  spinnerMargin:string = '100px auto';
   isError:boolean = false;
 
 
