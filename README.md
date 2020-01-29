@@ -23,6 +23,7 @@ Upgrades :
 * Install the angular CLI globally: `npm install -g @angular/cli@9.0.0-rc.9`.
 * Clone this repository: `git clone https://github.com/Romain-Dailly/expenses-handler.git`.
 * Run `npm install` from the project root.
+* Set the environment file as described lower.
 * Run `ng serve` or `npm run start` in a terminal from the project root.
 
 ## Environment
