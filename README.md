@@ -28,7 +28,7 @@ Upgrades :
 
 ## Environment
 
-Set values of your TOKEN and APIKEY in `environment.example.ts` and then change the file name to `environment.ts` for developpment purpose.
+Set values of your TOKEN and APIKEY in `src/environments/environment.example.ts` and then change the file name to `environment.ts` for developpment purpose.
 For production build, copy the content of the file in `environment.prod.ts`.
 
 For currency conversion to euros API : 
